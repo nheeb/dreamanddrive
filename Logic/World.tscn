@@ -16,3 +16,8 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Car" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.552449, 0.441362, 0, 0.62418, 0.781281, -0.707107, -0.552449, 0.441362, 4.42386, 6.17164, 2.23262 )
+projection = 1
+size = 5.0
