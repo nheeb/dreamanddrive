@@ -14,6 +14,10 @@ config/name="DreamAndDrive"
 run/main_scene="res://Logic/World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Game="*res://Logic/Game.tscn"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

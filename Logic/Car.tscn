@@ -14,6 +14,7 @@ transform = Transform( 0.220567, 0, 0, 0, 0.220567, 0, 0, 0, 0.220567, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="Model" type="Spatial" parent="."]
+transform = Transform( 5.87578, 0, 0, 0, 5.87578, 0, 0, 0, 5.87578, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Model"]
 transform = Transform( 0.10579, 0, 0, 0, -1.78187e-09, 0.0407645, 0, -0.254707, -1.11336e-08, 0, 0.0969322, 0.00822127 )
