@@ -3,8 +3,8 @@ extends Spatial
 enum StreetParts {Straight, StraightTurnEast, StraightTurnNorth, DiagonalEast, EastTurn, DiagonalNorth, NorthTurn}
 
 var possible_next_street := {	StreetParts.Straight: [StreetParts.Straight, StreetParts.StraightTurnEast, StreetParts.StraightTurnNorth],
-								StreetParts.StraightTurnEast: [StreetParts.DiagonalEast],
-								StreetParts.StraightTurnNorth: [StreetParts.DiagonalNorth],
+								StreetParts.StraightTurnEast: [StreetParts.DiagonalEast, StreetParts.EastTurn],
+								StreetParts.StraightTurnNorth: [StreetParts.DiagonalNorth, StreetParts.NorthTurn],
 								StreetParts.DiagonalEast: [StreetParts.DiagonalEast, StreetParts.EastTurn],
 								StreetParts.EastTurn: [StreetParts.Straight, StreetParts.StraightTurnNorth],
 								StreetParts.DiagonalNorth: [StreetParts.DiagonalNorth, StreetParts.NorthTurn],
@@ -129,7 +129,7 @@ func build_ground(coords: Array, street_dist: int):
 	var tween := get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(ground_object, "global_translation:y", 0.0, .2)
+	tween.tween_property(ground_object, "global_translation:y", 0.0, .4)
 
 const STREET_STRAIGHT = preload("res://StreetParts/StreetStraight.tscn")
 const STREET_CURVE = preload("res://StreetParts/StreetCurve.tscn")
@@ -165,7 +165,7 @@ func build_street(coords: Array, street_part: int):
 	var tween := get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(street_object, "global_translation:y", 0.0, .2)
+	tween.tween_property(street_object, "global_translation:y", 0.0, .4)
 
 func get_unbuilt_street_count():
 	var i = 0
@@ -179,8 +179,9 @@ func discover_coord(coords: Array):
 		plan_new_street()
 	if coords in discovered_coords:
 		return
+	randomize()
 	discovered_coords.append(coords)
 	for surrounding in get_surrouding_coords(coords, 4):
 		var has_build_something = build_tile(surrounding)
 		if has_build_something:
-			yield(get_tree().create_timer(.05),"timeout")
+			yield(get_tree().create_timer(.08),"timeout")

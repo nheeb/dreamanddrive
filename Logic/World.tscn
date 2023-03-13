@@ -31,6 +31,6 @@ visible = false
 [node name="CamPivot" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="CamPivot"]
-transform = Transform( 0.707107, 0.552449, -0.441362, 0, 0.62418, 0.781281, 0.707107, -0.552449, 0.441362, -16.378, 41.643, 22.816 )
+transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -16.378, 25.202, 22.816 )
 projection = 1
 size = 30.0
