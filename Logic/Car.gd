@@ -29,6 +29,9 @@ func get_input(delta):
 	var steer_movement : float = min(abs(steer_angle - steer_angle_target), abs(steer_speed * delta))
 	var new_angle = steer_angle + (steer_direction * steer_movement)
 	steer_angle = new_angle
+	
+	# Visual steering
+	$"%CarModel".visual_steer(steer_angle)
 
 
 func apply_friction():

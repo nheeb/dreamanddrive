@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Logic/Car.gd" type="Script" id=1]
+[ext_resource path="res://Logic/CarModel.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=2]
+radius = 4.13016
+height = 6.44481
 
 [sub_resource type="CapsuleMesh" id=3]
 
@@ -10,43 +13,48 @@
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.220567, 0, 0, 0, 0.220567, 0, 0, 0, 0.220567, 0, 0, 0 )
+transform = Transform( 0.220567, 0, 0, 0, 0.220567, 0, 0, 0, 0.220567, 0, 0.904041, 0 )
 shape = SubResource( 2 )
 
 [node name="Model" type="Spatial" parent="."]
-transform = Transform( 5.87578, 0, 0, 0, 5.87578, 0, 0, 0, 5.87578, 0, 0, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Model"]
+[node name="Prototype" type="MeshInstance" parent="Model"]
 transform = Transform( 0.10579, 0, 0, 0, -1.78187e-09, 0.0407645, 0, -0.254707, -1.11336e-08, 0, 0.0969322, 0.00822127 )
+visible = false
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 
-[node name="MeshInstance2" type="MeshInstance" parent="Model/MeshInstance"]
+[node name="MeshInstance2" type="MeshInstance" parent="Model/Prototype"]
 transform = Transform( 1, 0, 0, 0, 0.15662, -3.68653e-08, 0, -3.68652e-08, 1, 0, 0.576521, -1.6243 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3" type="MeshInstance" parent="Model/MeshInstance"]
+[node name="MeshInstance3" type="MeshInstance" parent="Model/Prototype"]
 transform = Transform( 1, 0, 0, 0, 0.15662, -3.68653e-08, 0, -3.68652e-08, 1, 0, -0.669446, -1.6243 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../../..")
 
 [node name="SpotLight" type="SpotLight" parent="Model"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.132179, 0.0615809, -0.170345 )
-light_energy = 3.0
-spot_range = 4.8058
-spot_angle = 13.5376
+transform = Transform( 1, 0, 0, 0, 0.994089, 0.108572, 0, -0.108572, 0.994089, -0.488077, 0.750159, -1.79058 )
+light_color = Color( 0.921569, 0.960784, 0.580392, 1 )
+light_energy = 5.0
+spot_range = 15.0
+spot_angle = 18.0
 
 [node name="SpotLight2" type="SpotLight" parent="Model"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104854, 0.0615809, -0.170345 )
-light_energy = 3.0
-spot_range = 4.8058
-spot_angle = 13.5376
+transform = Transform( 1, 0, 0, 0, 0.994089, 0.108572, 0, -0.108572, 0.994089, 0.529774, 0.740952, -1.80609 )
+light_color = Color( 0.921569, 0.960784, 0.580392, 1 )
+light_energy = 5.0
+spot_range = 15.0
+spot_angle = 18.0
 
 [node name="FrontWheelBase" type="Spatial" parent="Model"]
 unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.140534 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.931 )
 
 [node name="BackWheelBase" type="Spatial" parent="Model"]
 unique_name_in_owner = true
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.182509 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.898 )
+
+[node name="CarModel" parent="Model" instance=ExtResource( 2 )]
+unique_name_in_owner = true

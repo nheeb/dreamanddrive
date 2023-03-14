@@ -21,7 +21,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Car" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.33297, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.20527, 0 )
 
 [node name="Map" parent="." instance=ExtResource( 3 )]
 
@@ -31,6 +31,6 @@ visible = false
 [node name="CamPivot" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="CamPivot"]
-transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -16.378, 25.202, 22.816 )
+transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -17.789, 25.202, 22.816 )
 projection = 1
-size = 30.0
+size = 20.0

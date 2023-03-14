@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Logic/CarModel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Logic/DreamCar.gd" type="Script" id=2]
+
+[node name="DreamCar" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="CarModel" parent="." instance=ExtResource( 1 )]
+transform = Transform( -2.30988e-08, 0, -0.528439, 0, 0.528439, 0, 0.528439, 0, -2.30988e-08, 0, -0.0758914, 0 )
