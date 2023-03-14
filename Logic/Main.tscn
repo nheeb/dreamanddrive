@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Logic/World.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Logic/DreamWorld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Logic/Main.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D dream;
+
+void fragment() {
+	COLOR.rgb = mix(texture(TEXTURE,SCREEN_UV).rgb, texture(dream, SCREEN_UV).rgb, texture(dream, SCREEN_UV).a);
+}"
+
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("ViewportDream")
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/dream = SubResource( 3 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="ViewportDream" type="Viewport" parent="."]
+size = Vector2( 1000, 1000 )
+transparent_bg = true
+render_target_update_mode = 3
+
+[node name="DreamWorld" parent="ViewportDream" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -400, 0, 0 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="ViewportAwake" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 100, 400 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="World" parent="ViewportContainer/ViewportAwake" instance=ExtResource( 1 )]
+
+[connection signal="resized" from="ViewportContainer" to="." method="_on_ViewportContainer_resized"]

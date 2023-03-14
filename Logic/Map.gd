@@ -47,7 +47,7 @@ var discovered_coords := []
 func _ready():
 	setup()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	discover_coord(get_player_coordinates())
 
 func setup():

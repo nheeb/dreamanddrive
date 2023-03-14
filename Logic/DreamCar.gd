@@ -53,9 +53,6 @@ func change_direction(delta):
 	current_turn = clamp(current_turn, -1, 1)
 	
 	turn_velocity = (current_turn - old_turn_value) / delta
-	print("!")
-	print(turn_velocity)
-	print(current_turn)
 	
 	var eased_value := ease(current_turn / 2.0 + .5, -2.0) * 2.0 - 1.0
 	$CarModel.rotation_degrees.z = -eased_value * max_rotation_degrees
