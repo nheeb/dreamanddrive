@@ -23,6 +23,8 @@ func _physics_process(delta):
 
 func get_input(delta):
 	var turn : float = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
+	if Game.intro:
+		turn = 0.0
 	var steer_angle_target: float = turn * deg2rad(max_steering_angle)
 	var steer_direction := sign(steer_angle_target - steer_angle)
 	

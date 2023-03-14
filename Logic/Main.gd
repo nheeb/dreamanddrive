@@ -14,3 +14,8 @@ func refresh_size():
 
 	$ViewportContainer.update()
 	
+func _physics_process(delta):
+	if Game.intro:
+		if Input.is_action_just_pressed("click"):
+			Game.intro = false
+			# Music Start

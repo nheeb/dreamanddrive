@@ -6,5 +6,8 @@ var world
 var dream_world
 var dream_car
 
+var dead := false
+var intro := true
+
 func _ready():
 	randomize()

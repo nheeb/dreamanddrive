@@ -66,6 +66,8 @@ func plan_new_street():
 	var open_end : StreetEntry = open_ends.pop_front()
 	var open_end_type := open_end.street_part
 	var next_type = get_random_from_list(possible_next_street[open_end_type])
+	if Game.intro:
+		next_type = StreetParts.Straight
 	var next_x = open_end.x + street_offsets[open_end_type][0]
 	var next_z = open_end.z + street_offsets[open_end_type][1]
 	var next_entry := StreetEntry.new(next_x, next_z, next_type)
@@ -125,11 +127,11 @@ func build_ground(coords: Array, street_dist: int):
 	ground_object.global_translation.x = coords[0] * 20.0
 	ground_object.global_translation.z = coords[1] * 20.0
 	
-	ground_object.global_translation.y = -50.0
-	var tween := get_tree().create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(ground_object, "global_translation:y", 0.0, .4)
+	ground_object.global_translation.y = 0.0#-50.0
+#	var tween := get_tree().create_tween()
+#	tween.set_ease(Tween.EASE_OUT)
+#	tween.set_trans(Tween.TRANS_QUAD)
+#	tween.tween_property(ground_object, "global_translation:y", 0.0, .4)
 
 const STREET_STRAIGHT = preload("res://StreetParts/StreetStraight.tscn")
 const STREET_CURVE = preload("res://StreetParts/StreetCurve.tscn")
@@ -161,11 +163,11 @@ func build_street(coords: Array, street_part: int):
 	street_object.global_translation.x = coords[0] * 20.0
 	street_object.global_translation.z = coords[1] * 20.0
 
-	street_object.global_translation.y = 50.0
-	var tween := get_tree().create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(street_object, "global_translation:y", 0.0, .4)
+	street_object.global_translation.y = 0.0
+#	var tween := get_tree().create_tween()
+#	tween.set_ease(Tween.EASE_OUT)
+#	tween.set_trans(Tween.TRANS_QUAD)
+#	tween.tween_property(street_object, "global_translation:y", 0.0, .4)
 
 func get_unbuilt_street_count():
 	var i = 0
@@ -175,7 +177,7 @@ func get_unbuilt_street_count():
 	return i
 
 func discover_coord(coords: Array):
-	while get_unbuilt_street_count() < 10:
+	while get_unbuilt_street_count() < 3:
 		plan_new_street()
 	if coords in discovered_coords:
 		return
@@ -184,4 +186,4 @@ func discover_coord(coords: Array):
 	for surrounding in get_surrouding_coords(coords, 4):
 		var has_build_something = build_tile(surrounding)
 		if has_build_something:
-			yield(get_tree().create_timer(.08),"timeout")
+			yield(get_tree(),"idle_frame")

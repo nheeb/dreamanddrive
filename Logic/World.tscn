@@ -22,17 +22,22 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Car" parent="." instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.20527, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.76455e-08, 1.19506, 1.54755 )
 
 [node name="Map" parent="." instance=ExtResource( 3 )]
 
 [node name="StreetStraight" parent="." instance=ExtResource( 5 )]
-visible = false
+
+[node name="StreetStraight2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
+
+[node name="StreetStraight3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
 
 [node name="CamPivot" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="CamPivot"]
-transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -17.789, 25.202, 22.816 )
+transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -19.806, 24.577, 22.424 )
 projection = 1
 size = 20.0
 
