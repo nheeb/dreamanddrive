@@ -8,7 +8,8 @@ var acceleration := Vector3.ZERO
 var velocity := Vector3.ZERO
 var steer_angle := 0.0
 
-var engine := 600
+var engine := 350.0
+var engine_after_speed_up := 600.0
 var friction := -0.9
 var drag := -0.0015
 
@@ -54,3 +55,7 @@ func calculate_steering(delta):
 	var angle := Vector2(new_heading.x, new_heading.z).angle_to(Vector2.UP)
 	global_rotation.y = angle
 
+
+func intro_speed_up():
+	var tween := get_tree().create_tween()
+	tween.tween_property(self, "engine", engine_after_speed_up, 1.5)

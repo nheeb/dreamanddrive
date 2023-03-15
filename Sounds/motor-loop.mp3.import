@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/motor-loop.mp3-d2de883ad0ccf5bf0ce1fc40544fac0d.mp3str"
+
+[deps]
+
+source_file="res://Sounds/motor-loop.mp3"
+dest_files=[ "res://.import/motor-loop.mp3-d2de883ad0ccf5bf0ce1fc40544fac0d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

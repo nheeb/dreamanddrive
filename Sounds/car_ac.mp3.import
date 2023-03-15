@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/car_ac.mp3-34f4ce375e236cdc5f2a5848d120ced1.mp3str"
+
+[deps]
+
+source_file="res://Sounds/car_ac.mp3"
+dest_files=[ "res://.import/car_ac.mp3-34f4ce375e236cdc5f2a5848d120ced1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

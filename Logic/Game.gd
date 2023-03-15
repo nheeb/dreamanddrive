@@ -16,7 +16,12 @@ func _ready():
 	randomize()
 
 func start_intro():
-	yield(get_tree().create_timer(14.5),"timeout")
+	yield(get_tree().create_timer(4.5),"timeout")
+	Sound.fade_out_engine()
+	Sound.play_acc()
+	yield(get_tree().create_timer(.2),"timeout")
+	car.intro_speed_up()
+	yield(get_tree().create_timer(10),"timeout")
 	dream_world.cam_in()
 	world.cam_out()
 	dream_car.intro_movement()
