@@ -16,9 +16,14 @@ func refresh_size():
 
 	$ViewportContainer.update()
 	
+const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
 func _physics_process(delta):
 	if Game.intro:
 		if Input.is_action_just_pressed("click"):
 			Game.intro = false
-			# Music Start
+			Sound.start_music()
 			Game.start_intro()
+	if Input.is_action_just_pressed("cheat_spawn_car"):
+		var enemy_car = ENEMY_CAR.instance()
+		Game.world.add_child(enemy_car)
+		enemy_car.setup(Game.map.last_waypoint)

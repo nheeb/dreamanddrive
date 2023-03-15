@@ -16,7 +16,7 @@ func _ready():
 	randomize()
 
 func start_intro():
-	yield(get_tree().create_timer(3.0),"timeout")
+	yield(get_tree().create_timer(14.5),"timeout")
 	dream_world.cam_in()
 	world.cam_out()
 	dream_car.intro_movement()
@@ -29,7 +29,7 @@ var time_goal := 120.0
 func _physics_process(delta):
 	if not intro:
 		time_survived += delta
-		viewport_shader.set("shader_param/dream_start", time_survived / time_goal)
+		viewport_shader.set("shader_param/dream_progress", time_survived / time_goal)
 		if time_survived > time_goal:
 			trigger_end()
 

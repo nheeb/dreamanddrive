@@ -133,6 +133,8 @@ func build_ground(coords: Array, street_dist: int):
 #	tween.set_trans(Tween.TRANS_QUAD)
 #	tween.tween_property(ground_object, "global_translation:y", 0.0, .4)
 
+var last_waypoint = null
+
 const STREET_STRAIGHT = preload("res://StreetParts/StreetStraight.tscn")
 const STREET_CURVE = preload("res://StreetParts/StreetCurve.tscn")
 const STREET_DIAGONAL = preload("res://StreetParts/StreetDiagonal.tscn")
@@ -146,24 +148,32 @@ func build_street(coords: Array, street_part: int):
 		StreetParts.StraightTurnNorth:
 			street_object = STREET_CURVE.instance()
 			street_object.scale.z = -1
+			street_object.use_other_side = false
 		StreetParts.DiagonalEast:
 			street_object = STREET_DIAGONAL.instance()
 		StreetParts.EastTurn:
 			street_object = STREET_CURVE.instance()
 			street_object.scale.z = -1
+			street_object.use_other_side = false
 			street_object.scale.x = -1
+			street_object.use_wrong_order = true
 		StreetParts.DiagonalNorth:
 			street_object = STREET_DIAGONAL.instance()
 			street_object.scale.z = -1
+			street_object.use_other_side = false
 		StreetParts.NorthTurn:
 			street_object = STREET_CURVE.instance()
 			street_object.scale.x = -1
+			street_object.use_wrong_order = true
 	
 	add_child(street_object)
 	street_object.global_translation.x = coords[0] * 20.0
 	street_object.global_translation.z = coords[1] * 20.0
 
 	street_object.global_translation.y = 0.0
+	
+	last_waypoint = street_object.connect_waypoints(last_waypoint)
+
 #	var tween := get_tree().create_tween()
 #	tween.set_ease(Tween.EASE_OUT)
 #	tween.set_trans(Tween.TRANS_QUAD)
