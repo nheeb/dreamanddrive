@@ -23,3 +23,15 @@ func start_intro():
 	var tween := get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(viewport_shader, "shader_param/dream_start", 1.0, 3.0).from(0.0)
+
+var time_survived := 0.0
+var time_goal := 120.0
+func _physics_process(delta):
+	if not intro:
+		time_survived += delta
+		viewport_shader.set("shader_param/dream_start", time_survived / time_goal)
+		if time_survived > time_goal:
+			trigger_end()
+
+func trigger_end():
+	pass
