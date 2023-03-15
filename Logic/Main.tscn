@@ -12,8 +12,98 @@ render_mode blend_mix;
 
 uniform sampler2D dream;
 
+uniform int OCTAVE = 12;
+uniform vec4 CLOUD1_COL: hint_color = vec4(0.41,0.64,0.78,0.4);
+uniform vec4 CLOUD2_COL: hint_color = vec4(0.99,0.79,0.46,0.2);
+uniform vec4 CLOUD3_COL: hint_color = vec4(0.81,0.31,0.59,1.0);
+uniform vec4 CLOUD4_COL: hint_color = vec4(0.27,0.15,0.33,1.0);
+
+uniform float dream_start: hint_range(0.0, 1.0);
+uniform float dream_progress: hint_range(0.0, 1.0);
+
+float clamp_and_map(float value, float istart, float istop, float ostart, float ostop) {
+    value = clamp(value, istart, istop);
+    return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+}
+
+vec2 random(vec2 uv){
+    uv = vec2( dot(uv, vec2(127.1,311.7) ),
+               dot(uv, vec2(269.5,183.3) ) );
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
+float perlin(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix( mix( dot( random(uv_index + vec2(0.0,0.0) ), uv_fract - vec2(0.0,0.0) ),
+                     dot( random(uv_index + vec2(1.0,0.0) ), uv_fract - vec2(1.0,0.0) ), blur.x),
+                mix( dot( random(uv_index + vec2(0.0,1.0) ), uv_fract - vec2(0.0,1.0) ),
+                     dot( random(uv_index + vec2(1.0,1.0) ), uv_fract - vec2(1.0,1.0) ), blur.x), blur.y) + 0.5;
+}
+
+
+float fbm(vec2 input){
+	float value = 0.0;
+	float scale = 0.5;
+	
+	for(int i = 0; i < OCTAVE; i++){
+		value += perlin(input)*scale;
+		input*=2.0;
+		scale*=0.5;
+	}
+	return value;
+}
+
+float fbmCloud(vec2 input, float minimum){
+	float value = 0.0;
+	float scale = 0.5;
+	
+	for(int i = 0; i < OCTAVE; i++){
+		value += perlin(input)*scale;
+		input*=2.0;
+		scale*=0.5;
+	}
+	return smoothstep(0.,1.,(smoothstep(minimum,1.,value)-minimum)/(1.0-minimum));
+}
+
+float fbmCloud2(vec2 input, float minimum){
+	float value = 0.0;
+	float scale = 0.5;
+	
+	for(int i = 0; i < OCTAVE; i++){
+		value += perlin(input)*scale;
+		input*=2.0;
+		scale*=0.5;
+	}
+	return (smoothstep(minimum,1.,value)-minimum)/(1.0-minimum);
+}
+
+vec4 dream_nebula(vec2 uv) {
+	float tide = 0.05*sin(TIME)*sin(TIME);
+	float tide2 = 0.06*cos(0.3*TIME)*cos(.3*TIME);
+	vec4 nebula_texture = fbmCloud(2.0*uv + vec2(.6*TIME, .2*sin(TIME)), .1 + tide) * CLOUD1_COL;
+	nebula_texture += fbmCloud(3.0*uv + vec2(.65*TIME, .25*cos(.6*TIME)), .1 + tide) * CLOUD2_COL;
+	nebula_texture = mix(nebula_texture, CLOUD3_COL, fbmCloud(5.0*uv + vec2(.8*TIME, .25*cos(.6*TIME)), .2 + tide2));
+	return nebula_texture;
+}
+
+float dream_border(vec2 uv) {
+	float radius = 1.2;
+	float border_width = .1 + .2 * dream_progress;
+	float start = dream_start * .4 + dream_progress * .1 - (1.0-dream_start) * .5;
+	float end = start + border_width;
+	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 4.0 + TIME * .5);
+	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), .8);
+}
+
 void fragment() {
-	COLOR.rgb = mix(texture(TEXTURE,SCREEN_UV).rgb, texture(dream, SCREEN_UV).rgb, texture(dream, SCREEN_UV).a);
+	COLOR = vec4(dream_border(UV));
+	COLOR.a = 1.0;
+	//COLOR = dream_nebula(UV);
+	//COLOR.rgb = mix(texture(TEXTURE,SCREEN_UV).rgb, texture(dream, SCREEN_UV).rgb, texture(dream, SCREEN_UV).a);
 }"
 
 [sub_resource type="ViewportTexture" id=3]
@@ -22,6 +112,13 @@ viewport_path = NodePath("ViewportDream")
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
+shader_param/OCTAVE = 12
+shader_param/CLOUD1_COL = Color( 0.41, 0.64, 0.78, 0.4 )
+shader_param/CLOUD2_COL = Color( 0.99, 0.79, 0.46, 0.2 )
+shader_param/CLOUD3_COL = Color( 0.81, 0.31, 0.59, 1 )
+shader_param/CLOUD4_COL = Color( 0.27, 0.15, 0.33, 1 )
+shader_param/dream_start = 1.0
+shader_param/dream_progress = 0.0
 shader_param/dream = SubResource( 3 )
 
 [node name="Main" type="Control"]
@@ -45,7 +142,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="ViewportAwake" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 100, 400 )
+size = Vector2( 1024, 600 )
 handle_input_locally = false
 render_target_update_mode = 3
 
