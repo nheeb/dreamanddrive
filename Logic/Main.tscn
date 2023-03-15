@@ -21,6 +21,8 @@ uniform vec4 CLOUD4_COL: hint_color = vec4(0.27,0.15,0.33,1.0);
 uniform float dream_start: hint_range(0.0, 1.0);
 uniform float dream_progress: hint_range(0.0, 1.0);
 
+uniform float nebula_factor = 1.0;
+
 float clamp_and_map(float value, float istart, float istop, float ostart, float ostop) {
     value = clamp(value, istart, istop);
     return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
@@ -92,18 +94,32 @@ vec4 dream_nebula(vec2 uv) {
 
 float dream_border(vec2 uv) {
 	float radius = 1.2;
-	float border_width = .1 + .2 * dream_progress;
+	float border_width = .08 + .2 * dream_progress;
 	float start = dream_start * .4 + dream_progress * .1 - (1.0-dream_start) * .5;
 	float end = start + border_width;
-	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 4.0 + TIME * .5);
-	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), .8);
+	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 8.0 + vec2(TIME, - .3 *TIME) * 2.0);
+	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), 1.5);
+}
+
+float dream_border_wide(vec2 uv, float extend) {
+	float radius = 1.2;
+	float border_width = .1 + .2 * dream_progress + .3 * extend;
+	float start = extend * .1 + dream_start * .4 + dream_progress * .1 - (1.0-dream_start) * .5;
+	float end = start + border_width;
+	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 8.0 + vec2(TIME, - .3 *TIME) * 2.0);//perlin(uv * 4.0 + TIME * .5);
+	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), 1.0);
 }
 
 void fragment() {
-	COLOR = vec4(dream_border(UV));
-	COLOR.a = 1.0;
-	//COLOR = dream_nebula(UV);
-	//COLOR.rgb = mix(texture(TEXTURE,SCREEN_UV).rgb, texture(dream, SCREEN_UV).rgb, texture(dream, SCREEN_UV).a);
+	// Base Layer
+	COLOR = texture(TEXTURE, UV);
+	// Dream Background
+	COLOR.rgb = mix(CLOUD4_COL.rgb, COLOR.rgb, dream_border(UV));
+	// Dream Nebula
+	vec4 nebula = dream_nebula(UV);
+	COLOR.rgb = mix(COLOR.rgb,nebula.rgb , nebula_factor * nebula.a * (1.0 - (dream_border_wide(UV, .5))));
+	// Dream Layer
+	COLOR.rgb = mix(COLOR.rgb,texture(dream, UV).rgb , texture(dream, UV).a* (1.0 - (dream_border_wide(UV, .5))));
 }"
 
 [sub_resource type="ViewportTexture" id=3]
@@ -113,12 +129,13 @@ viewport_path = NodePath("ViewportDream")
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/OCTAVE = 12
-shader_param/CLOUD1_COL = Color( 0.41, 0.64, 0.78, 0.4 )
-shader_param/CLOUD2_COL = Color( 0.99, 0.79, 0.46, 0.2 )
+shader_param/CLOUD1_COL = Color( 0.411765, 0.639216, 0.780392, 1 )
+shader_param/CLOUD2_COL = Color( 0.988235, 0.788235, 0.458824, 1 )
 shader_param/CLOUD3_COL = Color( 0.81, 0.31, 0.59, 1 )
-shader_param/CLOUD4_COL = Color( 0.27, 0.15, 0.33, 1 )
-shader_param/dream_start = 1.0
+shader_param/CLOUD4_COL = Color( 0.92549, 0.776471, 1, 1 )
+shader_param/dream_start = 0.0
 shader_param/dream_progress = 0.0
+shader_param/nebula_factor = 1.0
 shader_param/dream = SubResource( 3 )
 
 [node name="Main" type="Control"]

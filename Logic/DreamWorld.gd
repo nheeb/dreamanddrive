@@ -11,3 +11,6 @@ func _ready():
 	
 func _process(_delta):
 	$CamPivot.global_translation = car_start + Vector3.BACK * $DreamCar.global_translation.z + cam_offset
+
+func cam_in():
+	$CamAnimation.play("intro")

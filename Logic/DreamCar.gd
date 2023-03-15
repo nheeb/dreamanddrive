@@ -1,5 +1,8 @@
 extends Spatial
 
+var intro_mode := true
+var intro_controls := 0.0
+
 var horizontal_speed := 4.0
 var vertical_speed := 0.0
 
@@ -26,6 +29,8 @@ func get_input():
 		input_direction = 0.0
 	if input_direction < 0.0 and global_translation.y < -borders:
 		input_direction = 0.0
+	if intro_mode:
+		input_direction = intro_controls
 
 func change_direction(delta):
 	#var turn_direction := sign(input_direction - current_turn)
@@ -67,3 +72,12 @@ func fly(delta):
 	global_translation += velocity * delta
 	
 	#print(global_translation.y)
+
+func intro_movement():
+	intro_controls = -1.0
+	yield(get_tree().create_timer(1.0),"timeout")
+	intro_controls = 1.0
+	yield(get_tree().create_timer(1.0),"timeout")
+	intro_controls = 0.0
+	yield(get_tree().create_timer(1.0),"timeout")
+	intro_mode = false

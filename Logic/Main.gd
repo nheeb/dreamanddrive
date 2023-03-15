@@ -1,6 +1,8 @@
 extends Control
 
 func _ready():
+	Game.main = self
+	Game.viewport_shader = $ViewportContainer.material
 	yield(get_tree().create_timer(.01),"timeout")
 	refresh_size()
 
@@ -19,3 +21,4 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("click"):
 			Game.intro = false
 			# Music Start
+			Game.start_intro()

@@ -10,3 +10,6 @@ func _ready():
 	
 func _process(delta):
 	$CamPivot.global_translation = $Car.global_translation + cam_offset
+
+func cam_out():
+	$CamAnimation.play("intro")
