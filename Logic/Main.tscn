@@ -95,7 +95,7 @@ vec4 dream_nebula(vec2 uv) {
 float dream_border(vec2 uv) {
 	float radius = 1.2;
 	float border_width = .08 + .2 * dream_progress;
-	float start = dream_start * .4 + dream_progress * .1 - (1.0-dream_start) * .5;
+	float start = dream_start * .3 + dream_progress * .2 - (1.0-dream_start) * .5;
 	float end = start + border_width;
 	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 8.0 + vec2(TIME, - .3 *TIME) * 2.0);
 	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), 1.5);
@@ -104,7 +104,7 @@ float dream_border(vec2 uv) {
 float dream_border_wide(vec2 uv, float extend) {
 	float radius = 1.2;
 	float border_width = .1 + .2 * dream_progress + .3 * extend;
-	float start = extend * .1 + dream_start * .4 + dream_progress * .1 - (1.0-dream_start) * .5;
+	float start = extend * .1 + dream_start * .3 + dream_progress * .2 - (1.0-dream_start) * .5;
 	float end = start + border_width;
 	float dist = length(uv - vec2(-radius, .5)) + .08* perlin(uv * 8.0 + vec2(TIME, - .3 *TIME) * 2.0);//perlin(uv * 4.0 + TIME * .5);
 	return pow(clamp_and_map(dist,radius+start, radius+end, 0.0, 1.0), 1.0);

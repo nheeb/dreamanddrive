@@ -8,6 +8,7 @@ size = Vector3( 20, 2, 20 )
 [node name="BasicGround" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 

@@ -12,11 +12,20 @@ var viewport_shader: ShaderMaterial
 var dead := false
 var intro := true
 
+
+var health_points := 3
+var damage := 0.0
+var max_damage := 100.0
+
 func _ready():
 	randomize()
 
 func start_intro():
-	yield(get_tree().create_timer(4.5),"timeout")
+	world.reduce_sky_energy()
+	yield(get_tree().create_timer(2.0),"timeout")
+	car.turn_on_lights()
+	world.show_intro_texts()
+	yield(get_tree().create_timer(2.5),"timeout")
 	Sound.fade_out_engine()
 	Sound.play_acc()
 	yield(get_tree().create_timer(.2),"timeout")
@@ -40,3 +49,6 @@ func _physics_process(delta):
 
 func trigger_end():
 	pass
+
+#func _process(delta):
+#	print(Engine.get_frames_per_second())
