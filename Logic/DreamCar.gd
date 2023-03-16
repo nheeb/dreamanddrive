@@ -3,7 +3,7 @@ extends Spatial
 var intro_mode := true
 var intro_controls := 0.0
 
-var horizontal_speed := 4.0
+var horizontal_speed := 5.0
 var vertical_speed := 0.0
 
 var max_vertical_speed := 4.0

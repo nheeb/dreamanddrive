@@ -62,7 +62,7 @@ func intro_speed_up():
 func turn_on_lights():
 	$Model/SpotLight.visible = true
 	$Model/SpotLight2.visible = true
-	yield(get_tree().create_timer(.02),"timeout")
+	yield(get_tree().create_timer(.04),"timeout")
 	$Model/SpotLight.visible = false
 	$Model/SpotLight2.visible = false
 	yield(get_tree().create_timer(.3),"timeout")

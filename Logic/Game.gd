@@ -52,3 +52,14 @@ func trigger_end():
 
 #func _process(delta):
 #	print(Engine.get_frames_per_second())
+
+
+const OBSTACLE_MOVER = preload("res://DreamObstacles/ObstacleMover.tscn")
+func spawn_dream_obstacle():
+	var pos = dream_world.global_translation
+	pos.z = dream_car.global_translation.z - 30.0
+	var o = OBSTACLE_MOVER.instance()
+	dream_world.add_child(o)
+	o.global_translation = pos
+	if randi() % 2 == 0:
+		o.global_rotate(Vector3.FORWARD, deg2rad(180.0))

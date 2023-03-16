@@ -62,10 +62,10 @@ script = ExtResource( 2 )
 [node name="DreamCar" parent="." instance=ExtResource( 1 )]
 
 [node name="CamPivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.338, 2.236, -10.197 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.333, 2.236, -9.007 )
 
 [node name="Camera" type="Camera" parent="CamPivot"]
-transform = Transform( -0.256049, -0.14591, 0.955588, -0.0377644, 0.989298, 0.140938, -0.965926, -1.56462e-07, -0.258819, 0, 0, 0 )
+transform = Transform( -0.170889, -0.145355, 0.97451, -0.0377644, 0.989298, 0.140938, -0.984566, -0.012717, -0.174549, 0, 0, 0 )
 current = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

@@ -27,3 +27,5 @@ func _physics_process(delta):
 		var enemy_car = ENEMY_CAR.instance()
 		Game.world.add_child(enemy_car)
 		enemy_car.setup(Game.map.last_waypoint)
+	if Input.is_action_just_pressed("cheat_spawn_obstacle"):
+		Game.spawn_dream_obstacle()

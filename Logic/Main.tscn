@@ -119,7 +119,7 @@ void fragment() {
 	vec4 nebula = dream_nebula(UV);
 	COLOR.rgb = mix(COLOR.rgb,nebula.rgb , nebula_factor * nebula.a * (1.0 - (dream_border_wide(UV, .5))));
 	// Dream Layer
-	COLOR.rgb = mix(COLOR.rgb,texture(dream, UV).rgb , texture(dream, UV).a* (1.0 - (dream_border_wide(UV, .5))));
+	COLOR.rgb = mix(COLOR.rgb,texture(dream, UV).rgb , texture(dream, UV).a* (1.0 - (dream_border_wide(UV, 1.2))));
 }"
 
 [sub_resource type="ViewportTexture" id=3]
