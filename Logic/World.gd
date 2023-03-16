@@ -17,7 +17,7 @@ func cam_out():
 func show_intro_texts():
 	$IntroTexts.translation.x = Game.car.translation.x
 	$IntroTexts.visible = true
-	yield(get_tree().create_timer(7.5),"timeout")
+	yield(get_tree().create_timer(15.5),"timeout")
 	$IntroTexts.queue_free()
 
 func reduce_sky_energy():

@@ -12,6 +12,11 @@ var viewport_shader: ShaderMaterial
 var dead := false
 var intro := true
 
+
+var health_points := 3
+var damage := 0.0
+var max_damage := 100.0
+
 func _ready():
 	randomize()
 
@@ -44,3 +49,6 @@ func _physics_process(delta):
 
 func trigger_end():
 	pass
+
+#func _process(delta):
+#	print(Engine.get_frames_per_second())
