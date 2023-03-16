@@ -7,4 +7,3 @@
 script = ExtResource( 2 )
 
 [node name="CarModel" parent="." instance=ExtResource( 1 )]
-transform = Transform( -2.30988e-08, 0, -0.528439, 0, 0.528439, 0, 0.528439, 0, -2.30988e-08, 0, -0.0758914, 0 )

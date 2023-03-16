@@ -1,9 +1,12 @@
 [gd_resource type="Environment" load_steps=2 format=2]
 
 [sub_resource type="ProceduralSky" id=1]
+sky_energy = 0.4
+ground_energy = 0.5
+sun_energy = 0.5
 
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
 glow_enabled = true
-glow_intensity = 1.0
+glow_intensity = 1.4

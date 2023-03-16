@@ -21,13 +21,13 @@ func start_intro():
 	Sound.play_acc()
 	yield(get_tree().create_timer(.2),"timeout")
 	car.intro_speed_up()
-	yield(get_tree().create_timer(10),"timeout")
+	yield(get_tree().create_timer(9),"timeout")
 	dream_world.cam_in()
 	world.cam_out()
 	dream_car.intro_movement()
 	var tween := get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(viewport_shader, "shader_param/dream_start", 1.0, 3.0).from(0.0)
+	tween.tween_property(viewport_shader, "shader_param/dream_start", 1.0, 5.0).from(0.0)
 
 var time_survived := 0.0
 var time_goal := 120.0

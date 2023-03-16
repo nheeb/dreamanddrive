@@ -6,9 +6,9 @@ var intro_controls := 0.0
 var horizontal_speed := 4.0
 var vertical_speed := 0.0
 
-var max_vertical_speed := 3.0
+var max_vertical_speed := 4.0
 var max_rotation_degrees := 35.0
-var borders := 3.3
+var borders := 3.8
 var soft_border_width := .5
 
 var input_direction := 0.0
