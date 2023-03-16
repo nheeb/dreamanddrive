@@ -132,6 +132,9 @@ func build_ground(coords: Array, street_dist: int):
 #	tween.set_ease(Tween.EASE_OUT)
 #	tween.set_trans(Tween.TRANS_QUAD)
 #	tween.tween_property(ground_object, "global_translation:y", 0.0, .4)
+	
+	Decorator.decorate(ground_object, street_dist)
+
 
 var last_waypoint = null
 
