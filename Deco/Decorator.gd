@@ -1,10 +1,12 @@
 extends Node
 
 func decorate(tile: Spatial, level: int):
+	if level == 0:
+		return
 	if tile.has_node("DecoSpots"):
 		var spots := tile.get_node("DecoSpots").get_children()
 		for spot in spots:
-			if randi() % 5 < level:
+			if randi() % 4 < level:
 				build_random_deco(spot.global_translation + Vector3.UP)
 
 
@@ -22,4 +24,4 @@ func build_random_deco(pos: Vector3):
 	var deco : Spatial = deco_scene.instance()
 	Game.map.add_child(deco)
 	deco.global_translation = pos
-	deco.rotation_degrees.y = randf() * 360.0
+	#deco.rotation_degrees.y = randf() * 360.0

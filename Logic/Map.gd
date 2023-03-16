@@ -190,7 +190,7 @@ func get_unbuilt_street_count():
 	return i
 
 func discover_coord(coords: Array):
-	while get_unbuilt_street_count() < 3:
+	while get_unbuilt_street_count() < 4:
 		plan_new_street()
 	if coords in discovered_coords:
 		return

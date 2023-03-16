@@ -50,13 +50,13 @@ surfaces/0 = {
 [node name="Stones1" type="Spatial"]
 
 [node name="Stone1" type="MeshInstance" parent="."]
-transform = Transform( 0.279062, 0, -0.730193, 0, 0.781702, 0, 0.730193, 0, 0.279062, 1.7802, 0, -0.560459 )
+transform = Transform( 0.158914, 0, -0.415814, 0, 0.445147, 0, 0.415814, 0, 0.158914, 1.18148, 0, -0.175295 )
 mesh = SubResource( 1 )
 
 [node name="Stone4" type="MeshInstance" parent="."]
-transform = Transform( 0.781702, 0, 0, 0, 0.781702, 0, 0, 0, 0.781702, -1.00103, 0, 1.90191 )
+transform = Transform( 0.445147, 0, 0, 0, 0.445147, 0, 0, 0, 0.445147, -0.402312, 0, 1.22692 )
 mesh = SubResource( 2 )
 
 [node name="Stone5" type="MeshInstance" parent="."]
-transform = Transform( 0.781702, 0, 0, 0, 0.781702, 0, 0, 0, 0.781702, -0.841601, 0, -1.23362 )
+transform = Transform( 0.445147, 0, 0, 0, 0.445147, 0, 0, 0, 0.445147, -0.311524, 0, -0.558632 )
 mesh = SubResource( 3 )

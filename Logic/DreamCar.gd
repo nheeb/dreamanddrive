@@ -77,7 +77,7 @@ func intro_movement():
 	intro_controls = -1.0
 	yield(get_tree().create_timer(1.0),"timeout")
 	intro_controls = 1.0
-	yield(get_tree().create_timer(1.0),"timeout")
+	yield(get_tree().create_timer(1.5),"timeout")
 	intro_controls = 0.0
-	yield(get_tree().create_timer(1.0),"timeout")
+	yield(get_tree().create_timer(.5),"timeout")
 	intro_mode = false

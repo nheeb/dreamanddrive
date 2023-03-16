@@ -20,5 +20,5 @@ surfaces/0 = {
 [node name="DeadTree1" type="Spatial"]
 
 [node name="DeadTree1" type="MeshInstance" parent="."]
-transform = Transform( 0.626464, 0, 0, 0, 0.626464, 0, 0, 0, 0.626464, 0, 0, 0 )
+transform = Transform( 0.626464, 0, 0, 0, 0.690894, 0, 0, 0, 0.626464, 0, 0.119513, 0 )
 mesh = SubResource( 1 )
