@@ -9,5 +9,6 @@ albedo_color = Color( 0.8, 0.843137, 0.501961, 1 )
 [node name="BasicGround" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )

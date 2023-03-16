@@ -35,7 +35,7 @@ func get_input(delta):
 	
 	# Visual steering
 	$"%CarModel".visual_steer(steer_angle)
-
+	#Game.dream_car.get_node("CarModel").visual_steer(steer_angle)
 
 func apply_friction():
 	if velocity.length() < .01:
@@ -55,7 +55,16 @@ func calculate_steering(delta):
 	var angle := Vector2(new_heading.x, new_heading.z).angle_to(Vector2.UP)
 	global_rotation.y = angle
 
-
 func intro_speed_up():
 	var tween := get_tree().create_tween()
 	tween.tween_property(self, "engine", engine_after_speed_up, 1.5)
+
+func turn_on_lights():
+	$Model/SpotLight.visible = true
+	$Model/SpotLight2.visible = true
+	yield(get_tree().create_timer(.02),"timeout")
+	$Model/SpotLight.visible = false
+	$Model/SpotLight2.visible = false
+	yield(get_tree().create_timer(.3),"timeout")
+	$Model/SpotLight.visible = true
+	$Model/SpotLight2.visible = true

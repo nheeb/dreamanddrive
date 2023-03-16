@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Logic/Car.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Logic/World.gd" type="Script" id=4]
 [ext_resource path="res://StreetParts/StreetStraight.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
+[ext_resource path="res://Fonts/LemonMilk.otf" type="DynamicFontData" id=7]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -79,13 +80,44 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 3 )
 }
 
+[sub_resource type="DynamicFont" id=5]
+size = 128
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("DirectionalLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "sun"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("DirectionalLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+
 [node name="World" type="Spatial"]
 script = ExtResource( 4 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.791202, -1.06764e-07, 0.611555, -0.427043, 0.715815, 0.552489, -0.43776, -0.69829, 0.566354, 0, 4.91019, 0 )
-light_color = Color( 0.635294, 0.839216, 0.894118, 1 )
-light_energy = 0.2
+light_color = Color( 0.89475, 0.9, 0.837, 1 )
+light_energy = 2.0
 shadow_enabled = true
 directional_shadow_mode = 0
 
@@ -121,3 +153,25 @@ environment = ExtResource( 6 )
 [node name="CamAnimation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/intro = SubResource( 4 )
+
+[node name="IntroTexts" type="Spatial" parent="."]
+visible = false
+
+[node name="Label3D" type="Label3D" parent="IntroTexts"]
+transform = Transform( 1.59269, 0, 0, 0, -6.96186e-08, 1.59269, 0, -1.59269, -6.96186e-08, 36.0185, 1.31229, -1.21337 )
+cast_shadow = 0
+modulate = Color( 0.20275, 0.1975, 0.25, 1 )
+text = "As the light fades..."
+font = SubResource( 5 )
+
+[node name="Label3D2" type="Label3D" parent="IntroTexts"]
+transform = Transform( 1.73426, 0, 0, 0, -7.58068e-08, 1.73426, 0, -1.73426, -7.58068e-08, 68.904, 1.31229, 1.35802 )
+cast_shadow = 0
+modulate = Color( 0.20275, 0.1975, 0.25, 1 )
+text = "Your mind begins to wander"
+font = SubResource( 5 )
+
+[node name="SunPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/RESET = SubResource( 7 )
+anims/sun = SubResource( 6 )

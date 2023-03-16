@@ -36,17 +36,19 @@ skeleton = NodePath("../../..")
 
 [node name="SpotLight" type="SpotLight" parent="Model"]
 transform = Transform( 1, 0, 0, 0, 0.994089, 0.108572, 0, -0.108572, 0.994089, -0.488077, 0.750159, -1.79058 )
+visible = false
 light_color = Color( 0.921569, 0.960784, 0.580392, 1 )
 light_energy = 5.0
 spot_range = 15.0
-spot_angle = 18.0
+spot_angle = 21.0
 
 [node name="SpotLight2" type="SpotLight" parent="Model"]
 transform = Transform( 1, 0, 0, 0, 0.994089, 0.108572, 0, -0.108572, 0.994089, 0.529774, 0.740952, -1.80609 )
+visible = false
 light_color = Color( 0.921569, 0.960784, 0.580392, 1 )
 light_energy = 5.0
 spot_range = 15.0
-spot_angle = 18.0
+spot_angle = 21.0
 
 [node name="FrontWheelBase" type="Spatial" parent="Model"]
 unique_name_in_owner = true

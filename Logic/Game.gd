@@ -16,7 +16,11 @@ func _ready():
 	randomize()
 
 func start_intro():
-	yield(get_tree().create_timer(4.5),"timeout")
+	world.reduce_sky_energy()
+	yield(get_tree().create_timer(2.0),"timeout")
+	car.turn_on_lights()
+	world.show_intro_texts()
+	yield(get_tree().create_timer(2.5),"timeout")
 	Sound.fade_out_engine()
 	Sound.play_acc()
 	yield(get_tree().create_timer(.2),"timeout")
