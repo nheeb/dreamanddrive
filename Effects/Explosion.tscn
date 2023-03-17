@@ -1,17 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Effects/Explosion.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sound/boom.ogg" type="AudioStream" id=2]
-
-[sub_resource type="SphereMesh" id=1]
-radius = 3.0
-height = 4.0
-radial_segments = 8
-rings = 8
-
-[sub_resource type="CylinderShape" id=2]
-height = 4.29335
-radius = 3.21718
 
 [sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.318059, 0.390836, 0.625337, 1 )
@@ -100,17 +89,6 @@ rings = 8
 [node name="Explosion" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-visible = false
-mesh = SubResource( 1 )
-
-[node name="Area" type="Area" parent="."]
-collision_layer = 0
-collision_mask = 12
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 2 )
-
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.829882, 0 )
 emitting = false
@@ -148,12 +126,9 @@ draw_pass_1 = SubResource( 13 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02012, 0 )
 light_color = Color( 1, 0.945098, 0.494118, 1 )
 light_energy = 10.0
-omni_range = 7.51348
+omni_range = 15.0
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="BoomStream" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
 volume_db = -18.353
-
-[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]

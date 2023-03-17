@@ -6,6 +6,8 @@ var world
 var dream_world
 var dream_car
 var main
+var world_cam
+var dream_cam
 
 var viewport_shader: ShaderMaterial
 
@@ -53,6 +55,9 @@ func trigger_end():
 #func _process(delta):
 #	print(Engine.get_frames_per_second())
 
+func cam_shake():
+	world_cam.screen_shake()
+	dream_cam.screen_shake()
 
 const OBSTACLE_MOVER = preload("res://DreamObstacles/ObstacleMover.tscn")
 func spawn_dream_obstacle():

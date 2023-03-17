@@ -10,6 +10,8 @@ height = 6.44481
 [sub_resource type="CapsuleMesh" id=3]
 
 [node name="Car" type="KinematicBody"]
+axis_lock_motion_y = true
+move_lock_y = true
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

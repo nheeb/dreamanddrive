@@ -6,6 +6,7 @@ var car_start := Vector3.ZERO
 func _ready():
 	Game.dream_world = self
 	Game.dream_car = $DreamCar
+	Game.dream_cam = $CamPivot/Camera
 	cam_offset = $CamPivot.global_translation - $DreamCar.global_translation
 	car_start = $DreamCar.global_translation
 	

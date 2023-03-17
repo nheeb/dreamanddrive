@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Gltf/DeadTree.material" type="Material" id=1]
 
@@ -17,8 +17,17 @@ surfaces/0 = {
 "vertex_count": 750
 }
 
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 1.52824, 1, 0.713968 )
+
 [node name="DeadTree1" type="Spatial"]
 
 [node name="DeadTree1" type="MeshInstance" parent="."]
-transform = Transform( 0.626464, 0, 0, 0, 0.690894, 0, 0, 0, 0.626464, 0, 0.119513, 0 )
+transform = Transform( 0.595498, 0, -0.194524, 0, 0.690894, 0, 0.194524, 0, 0.595498, 0, 0.119513, 0 )
 mesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.39588, 0.936023, 0.481337 )
+shape = SubResource( 2 )

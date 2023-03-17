@@ -6,6 +6,7 @@ func _ready():
 	Game.world = self
 	Game.car = $Car
 	Game.map = $Map
+	Game.world_cam = $CamPivot/Camera
 	cam_offset = $CamPivot.global_translation - $Car.global_translation
 	
 func _process(delta):

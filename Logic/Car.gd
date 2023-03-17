@@ -21,6 +21,26 @@ func _physics_process(delta):
 	velocity += acceleration
 	calculate_steering(delta)
 	velocity = move_and_slide(velocity)
+	
+	var collision := get_last_slide_collision()
+	if collision != null:
+		handle_collision(collision)
+
+var has_collided := false
+const EXPLOSION = preload("res://Effects/Explosion.tscn")
+func handle_collision(collision: KinematicCollision):
+	if has_collided:
+		return
+	has_collided = true
+	var normal := collision.normal
+	var pos := collision.position
+	var explosion := EXPLOSION.instance()
+	Game.world.add_child(explosion)
+	explosion.global_translation = pos
+	Game.cam_shake()
+	yield(get_tree().create_timer(1),"timeout")
+	has_collided = false
+	#velocity = normal * velocity.length() * 100.0
 
 func get_input(delta):
 	var turn : float = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
