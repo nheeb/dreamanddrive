@@ -4,7 +4,7 @@ export var noise : OpenSimplexNoise
 export var seed_offset := 0
 var time := 0.0
 var trauma := 0.0
-var trauma_reduction := .75
+var trauma_reduction := .8
 var time_scale := 100.0
 
 var base_deg_x: float
@@ -17,7 +17,7 @@ func _ready():
 
 
 func screen_shake():
-	trauma = .8
+	trauma = 1.0
 
 func _process(delta):
 	if Input.is_action_just_pressed("cheat_screen_shake"):
@@ -27,8 +27,8 @@ func _process(delta):
 		trauma = max(trauma - delta * trauma_reduction, 0.0)
 		time += delta
 		
-		rotation_degrees.x = base_deg_x + 12.0 * get_shake_intensity() * get_noise_from_seed(1)
-		rotation_degrees.y = base_deg_y + 12.0 * get_shake_intensity() * get_noise_from_seed(2)
+		rotation_degrees.x = base_deg_x + 14.0 * get_shake_intensity() * get_noise_from_seed(1)
+		rotation_degrees.y = base_deg_y + 14.0 * get_shake_intensity() * get_noise_from_seed(2)
 		rotation_degrees.z = base_deg_z + 8.0 * get_shake_intensity() * get_noise_from_seed(3)
 
 

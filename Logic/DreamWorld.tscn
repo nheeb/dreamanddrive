@@ -72,6 +72,7 @@ transform = Transform( -0.170889, -0.145355, 0.97451, -0.0377644, 0.989298, 0.14
 current = true
 script = ExtResource( 4 )
 noise = SubResource( 5 )
+seed_offset = 5
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0, 27.785, 0, -27.785, 0, 0, 0, 0, 27.785, -6.42075, 0, -27.9297 )
