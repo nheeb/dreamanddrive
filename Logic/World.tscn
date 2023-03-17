@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Logic/Car.tscn" type="PackedScene" id=2]
@@ -7,11 +7,14 @@
 [ext_resource path="res://StreetParts/StreetStraight.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://Fonts/LemonMilk.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://Logic/ShakeCamera.gd" type="Script" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 1 )
+
+[sub_resource type="OpenSimplexNoise" id=8]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -146,6 +149,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 0 )
 transform = Transform( 0.707107, 0.419392, -0.569307, 0, 0.805122, 0.59311, 0.707107, -0.419392, 0.569307, -19.806, 24.577, 22.424 )
 projection = 1
 size = 20.0
+script = ExtResource( 8 )
+noise = SubResource( 8 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 6 )
