@@ -57,7 +57,7 @@ func trigger_end():
 const OBSTACLE_MOVER = preload("res://DreamObstacles/ObstacleMover.tscn")
 func spawn_dream_obstacle():
 	var pos = dream_world.global_translation
-	pos.z = dream_car.global_translation.z - 30.0
+	pos.z = dream_car.global_translation.z - (32.0 + randf() * 6.0)
 	var o = OBSTACLE_MOVER.instance()
 	dream_world.add_child(o)
 	o.global_translation = pos

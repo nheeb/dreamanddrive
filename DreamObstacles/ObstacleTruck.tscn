@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Logic/EnemyCar.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 1.44051
+height = 4.09578
+
+[node name="ObstacleTruck" type="Spatial"]
+
+[node name="EnemyCar" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 0.0871557, -0.996195, 0, 0.996195, 0.0871557, 0, -2.55773, -2.55233 )
+script = null
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -3.22002, 0 )
+shape = SubResource( 3 )

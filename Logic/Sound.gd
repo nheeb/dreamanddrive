@@ -1,7 +1,7 @@
 extends Node
 
 func start_music():
-	$MusicPlayer.play()
+	pass#$MusicPlayer.play()
 
 func fade_out_engine():
 	var tween := get_tree().create_tween()

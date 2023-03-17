@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Deco/Cactus2.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 1.30635
+height = 5.51658
+
+[node name="ObstacleCactus" type="Spatial"]
+
+[node name="Cactus2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 3.16255, 0, 0, 0, 3.16255, 0, 0, 0, 3.16255, 0, -11.3671, 0 )
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4.09529, 0 )
+shape = SubResource( 3 )
