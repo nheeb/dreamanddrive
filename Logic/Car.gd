@@ -130,8 +130,8 @@ func speed_boost():
 	currently_speed_boosting = true
 	Sound.play_acc()
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "engine_boost", 1.4, 1.0).from(1.0)
-	tween.tween_property(self, "engine_boost", 1.0, 4.0).from(1.4)
+	tween.tween_property(self, "engine_boost", 1.3, 1.2).from(1.0)
+	tween.tween_property(self, "engine_boost", 1.0, 3.5).from(1.3)
 	yield(tween,"finished")
 	currently_speed_boosting = false
 

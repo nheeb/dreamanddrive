@@ -20,6 +20,7 @@ func refresh_size():
 
 #const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
 func _physics_process(_delta):
+	$UI/Label.text = "FPS: " + str(Engine.get_frames_per_second())
 	if Game.intro:
 		if Input.is_action_just_pressed("click"):
 			Game.intro = false
@@ -35,3 +36,7 @@ func _physics_process(_delta):
 #		enemy_car.setup(Game.map.last_waypoint)
 	if Input.is_action_just_pressed("cheat_spawn_obstacle"):
 		Game.spawn_dream_obstacle()
+
+
+func _on_Timer_timeout():
+	refresh_size()
