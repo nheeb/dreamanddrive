@@ -9,8 +9,10 @@ func fade_out_engine():
 	yield(get_tree().create_timer(3.0),"timeout")
 	$CarEngine.stop()
 
-func play_acc():
+func play_acc(repeat := false):
 	$CarAccel.play()
+	if not repeat:
+		return
 	yield($CarAccel,"finished")
 	$CarAccel.play()
 

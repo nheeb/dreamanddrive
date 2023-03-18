@@ -87,7 +87,7 @@ func _on_Area_area_entered(area):
 	handle_collision()
 	print("!")
 
-var collision_cooldown := 5.0
+var collision_cooldown := 2.8
 var has_collided := false
 const EXPLOSION = preload("res://Effects/Explosion.tscn")
 func handle_collision():

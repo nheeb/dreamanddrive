@@ -18,7 +18,7 @@ func refresh_size():
 
 	$ViewportContainer.update()
 
-const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
+#const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
 func _physics_process(_delta):
 	if Game.intro:
 		if Input.is_action_just_pressed("click"):
@@ -29,8 +29,9 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("click"):
 			Game.reset_game()
 	if Input.is_action_just_pressed("cheat_spawn_car"):
-		var enemy_car = ENEMY_CAR.instance()
-		Game.world.add_child(enemy_car)
-		enemy_car.setup(Game.map.last_waypoint)
+		Game.spawn_truck()
+#		var enemy_car = ENEMY_CAR.instance()
+#		Game.world.add_child(enemy_car)
+#		enemy_car.setup(Game.map.last_waypoint)
 	if Input.is_action_just_pressed("cheat_spawn_obstacle"):
 		Game.spawn_dream_obstacle()

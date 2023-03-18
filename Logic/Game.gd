@@ -29,7 +29,7 @@ func start_intro():
 	world.show_intro_texts()
 	yield(get_tree().create_timer(2.5),"timeout")
 	Sound.fade_out_engine()
-	Sound.play_acc()
+	Sound.play_acc(true)
 	yield(get_tree().create_timer(.2),"timeout")
 	car.intro_speed_up()
 	yield(get_tree().create_timer(9),"timeout")
@@ -48,6 +48,30 @@ func _physics_process(delta):
 		viewport_shader.set("shader_param/dream_progress", time_survived / time_goal)
 		if time_survived > time_goal:
 			trigger_end()
+			
+		random_event_process(delta)
+
+var cooldown_truck := 5.0
+var cooldown_obstacle := 14.0
+var cooldown_speed := 20.0
+func random_event_process(delta: float):
+	var progress := time_survived / time_goal
+	
+	cooldown_truck -= delta
+	cooldown_obstacle -= delta
+	cooldown_speed -= delta
+	
+	if cooldown_truck <= 0.0:
+		spawn_truck()
+		cooldown_truck = lerp(10.0, 7.0, progress) + 3.0 * randf()
+	
+	if cooldown_obstacle <= 0.0:
+		spawn_dream_obstacle()
+		cooldown_obstacle = lerp(4.0, 2.0, progress) + 2.5 * randf()
+	
+	if cooldown_speed <= 0.0:
+		car.speed_boost()
+		cooldown_speed = 12.0 + randf() * 10.0 
 
 func trigger_end():
 	pass
@@ -68,6 +92,12 @@ func spawn_dream_obstacle():
 	o.global_translation = pos
 	if randi() % 2 == 0:
 		o.global_rotate(Vector3.FORWARD, deg2rad(180.0))
+
+const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
+func spawn_truck():
+	var enemy_car = ENEMY_CAR.instance()
+	Game.world.add_child(enemy_car)
+	enemy_car.setup(Game.map.last_waypoint)
 
 func take_awake_damage():
 	health_points -= 1
@@ -90,4 +120,6 @@ func reset_game():
 	health_points = 3
 	damage = 0.0
 	max_damage = 100.0
+	time_survived = 0.0
+	time_goal = 120.0
 	get_tree().change_scene("res://Logic/Main.tscn")

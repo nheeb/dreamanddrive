@@ -126,11 +126,12 @@ func update_engine_multiplicator():
 
 var currently_speed_boosting := false
 func speed_boost():
-	if currently_speed_boosting: return
+	if currently_speed_boosting or engine_stop < 1.0: return
 	currently_speed_boosting = true
+	Sound.play_acc()
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "engine_boost", 1.4, .5).from(1.0)
-	tween.tween_property(self, "engine_boost", 1.0, 4.0).from_current()
+	tween.tween_property(self, "engine_boost", 1.4, 1.0).from(1.0)
+	tween.tween_property(self, "engine_boost", 1.0, 4.0).from(1.4)
 	yield(tween,"finished")
 	currently_speed_boosting = false
 
