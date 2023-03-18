@@ -16,8 +16,8 @@ func _ready():
 	base_deg_z = rotation_degrees.z
 
 
-func screen_shake():
-	trauma = 1.0
+func screen_shake(intensity : float = 1.0):
+	trauma = intensity
 
 func _process(delta):
 	if Input.is_action_just_pressed("cheat_screen_shake"):

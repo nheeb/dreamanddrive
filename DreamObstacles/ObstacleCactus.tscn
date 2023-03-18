@@ -4,7 +4,7 @@
 
 [sub_resource type="CapsuleShape" id=3]
 radius = 1.30635
-height = 5.51658
+height = 7.33082
 
 [node name="ObstacleCactus" type="Spatial"]
 
@@ -16,5 +16,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4.09529, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -5.02417, 0 )
 shape = SubResource( 3 )

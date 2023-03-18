@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Gltf/Asphalt.material" type="Material" id=1]
 [ext_resource path="res://Gltf/WhiteLine.material" type="Material" id=2]
@@ -45,6 +45,9 @@ surfaces/2 = {
 "vertex_count": 12
 }
 
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 10.5008, 2.52298, 3.48714 )
+
 [node name="StreetStraight" type="Spatial"]
 script = ExtResource( 4 )
 
@@ -67,3 +70,11 @@ other_side = true
 [node name="StreetWayPoint4" parent="Waypoints" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.49714, 0, -1.29157 )
 other_side = true
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85521, 0 )
+shape = SubResource( 2 )

@@ -9,7 +9,7 @@ func _ready():
 	Game.world_cam = $CamPivot/Camera
 	cam_offset = $CamPivot.global_translation - $Car.global_translation
 	
-func _process(delta):
+func _process(_delta):
 	$CamPivot.global_translation = $Car.global_translation + cam_offset
 
 func cam_out():

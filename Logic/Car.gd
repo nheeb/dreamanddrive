@@ -14,9 +14,12 @@ var engine_multiplicator := 1.0
 var friction := -0.9
 var drag := -0.0015
 
-var collision_cooldown := 3.5
+var collision_cooldown := 5.0
+
+var on_dirt := false
 
 func _physics_process(delta):
+	test_for_dirt()
 	update_engine_multiplicator()
 	acceleration = Vector3.ZERO
 	get_input(delta)
@@ -25,7 +28,6 @@ func _physics_process(delta):
 	velocity += acceleration
 	calculate_steering(delta)
 	velocity = move_and_slide(velocity)
-	
 	var collision := get_last_slide_collision()
 	if collision != null:
 		handle_collision(collision)
@@ -37,17 +39,24 @@ func handle_collision(collision: KinematicCollision):
 		return
 	has_collided = true
 	halt()
+	Sound.play_boom()
 	if collision.collider.get_parent().has_method("_on_collide"):
 		collision.collider.get_parent()._on_collide()
+	
 	var normal := collision.normal
 	var pos := collision.position
+	
+	velocity = pos.direction_to(global_translation) * 14.0
+	
 	var explosion := EXPLOSION.instance()
 	Game.world.add_child(explosion)
 	explosion.global_translation = pos
+	
 	Game.cam_shake()
+	Game.take_awake_damage()
+	
 	yield(get_tree().create_timer(collision_cooldown),"timeout")
 	has_collided = false
-	#velocity = normal * velocity.length() * 100.0
 
 func get_input(delta):
 	var turn : float = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
@@ -69,14 +78,22 @@ func apply_friction():
 		velocity = Vector3.ZERO
 	var friction_force = velocity * friction
 	var drag_force = velocity * velocity.length() * drag
-
-	acceleration += (drag_force + friction_force)
+	if engine_stop > 0.01:
+		acceleration += (drag_force + friction_force)
+	else:
+		acceleration += friction_force * .1
+	
 
 func calculate_steering(delta):
+	if engine_stop < .1:
+		return
+	
+	var steer_factor : float = lerp(1.0, .4, engine_stop) if on_dirt else 1.0
+	
 	var back_wheel : Vector3 = $"%BackWheelBase".global_translation
 	var front_wheel : Vector3 = $"%FrontWheelBase".global_translation
 	back_wheel += velocity * delta
-	front_wheel += velocity.rotated(Vector3.UP, steer_angle) * delta
+	front_wheel += velocity.rotated(Vector3.UP, steer_angle * steer_factor) * delta
 	var new_heading = (front_wheel - back_wheel).normalized()
 	velocity = new_heading * velocity.length()
 	var angle := Vector2(new_heading.x, new_heading.z).angle_to(Vector2.UP)
@@ -98,10 +115,14 @@ func turn_on_lights():
 
 var engine_stop := 1.0
 var engine_boost := 1.0
+var engine_dirt := 1.0
 func update_engine_multiplicator():
 	engine_multiplicator = 1.0
 	engine_multiplicator *= engine_stop
 	engine_multiplicator *= engine_boost
+	engine_multiplicator *= engine_dirt
+	if Game.dead:
+		engine_multiplicator = 0.0
 
 var currently_speed_boosting := false
 func speed_boost():
@@ -118,6 +139,11 @@ func halt():
 	engine_stop = 0.0
 	if is_instance_valid(halt_tween):
 		halt_tween.kill()
-	yield(get_tree().create_timer(.8),"timeout")
+	yield(get_tree().create_timer(1.3),"timeout")
 	halt_tween = get_tree().create_tween()#.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	halt_tween.tween_property(self, "engine_stop", 1.0, 4.0).from(0.0)
+	halt_tween.tween_property(self, "engine_stop", 1.0, 5.0).from(0.0)
+
+func test_for_dirt():
+	on_dirt = len($Area.get_overlapping_areas()) == 0
+	engine_dirt = .9 if on_dirt else 1.0
+	$DirtParticles.emitting = on_dirt

@@ -20,6 +20,12 @@ Game="*res://Logic/Game.tscn"
 Sound="*res://Logic/Sound.tscn"
 Decorator="*res://Deco/Decorator.tscn"
 
+[debug]
+
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

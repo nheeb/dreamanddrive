@@ -14,8 +14,8 @@ var viewport_shader: ShaderMaterial
 var dead := false
 var intro := true
 
-
 var health_points := 3
+var dream_health_points := 3
 var damage := 0.0
 var max_damage := 100.0
 
@@ -55,9 +55,9 @@ func trigger_end():
 #func _process(delta):
 #	print(Engine.get_frames_per_second())
 
-func cam_shake():
-	world_cam.screen_shake()
-	dream_cam.screen_shake()
+func cam_shake(intensity := 1.0):
+	world_cam.screen_shake(intensity)
+	dream_cam.screen_shake(intensity)
 
 const OBSTACLE_MOVER = preload("res://DreamObstacles/ObstacleMover.tscn")
 func spawn_dream_obstacle():
@@ -68,3 +68,26 @@ func spawn_dream_obstacle():
 	o.global_translation = pos
 	if randi() % 2 == 0:
 		o.global_rotate(Vector3.FORWARD, deg2rad(180.0))
+
+func take_awake_damage():
+	health_points -= 1
+	if health_points <= 0:
+		trigger_death()
+
+func take_dream_damage():
+	dream_health_points -= 1
+	if dream_health_points <= 0:
+		trigger_death()
+
+func trigger_death():
+	dead = true
+	yield(get_tree().create_timer(2),"timeout")
+	main.click_to_restart = true
+
+func reset_game():
+	dead = false
+	intro = true
+	health_points = 3
+	damage = 0.0
+	max_damage = 100.0
+	get_tree().change_scene("res://Logic/Main.tscn")

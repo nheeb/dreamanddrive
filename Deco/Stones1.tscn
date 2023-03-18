@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Gltf/StoneMaterial.material" type="Material" id=1]
 
@@ -47,16 +47,25 @@ surfaces/0 = {
 "vertex_count": 90
 }
 
+[sub_resource type="SphereShape" id=4]
+radius = 1.37074
+
 [node name="Stones1" type="Spatial"]
 
 [node name="Stone1" type="MeshInstance" parent="."]
-transform = Transform( 0.158914, 0, -0.415814, 0, 0.445147, 0, 0.415814, 0, 0.158914, 1.18148, 0, -0.175295 )
+transform = Transform( 0.158914, 0, -0.415814, 0, 0.522452, 0, 0.415814, 0, 0.158914, 1.18148, 0, -0.175295 )
 mesh = SubResource( 1 )
 
 [node name="Stone4" type="MeshInstance" parent="."]
-transform = Transform( 0.445147, 0, 0, 0, 0.445147, 0, 0, 0, 0.445147, -0.402312, 0, 1.22692 )
+transform = Transform( 0.445147, 0, 0, 0, 0.515569, 0, 0, 0, 0.445147, -0.402312, 0, 1.22692 )
 mesh = SubResource( 2 )
 
 [node name="Stone5" type="MeshInstance" parent="."]
-transform = Transform( 0.445147, 0, 0, 0, 0.445147, 0, 0, 0, 0.445147, -0.311524, 0, -0.558632 )
+transform = Transform( 0.445147, 0, 0, 0, 0.563078, 0, 0, 0, 0.445147, -0.311524, 0, -0.558632 )
 mesh = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323586, 0.0976887, 0.340581 )
+shape = SubResource( 4 )

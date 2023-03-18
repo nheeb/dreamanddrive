@@ -81,3 +81,28 @@ func intro_movement():
 	intro_controls = 0.0
 	yield(get_tree().create_timer(.5),"timeout")
 	intro_mode = false
+
+
+func _on_Area_area_entered(area):
+	handle_collision()
+	print("!")
+
+var collision_cooldown := 5.0
+var has_collided := false
+const EXPLOSION = preload("res://Effects/Explosion.tscn")
+func handle_collision():
+	if has_collided:
+		return
+	has_collided = true
+	
+	Sound.play_boom()
+	
+	var explosion := EXPLOSION.instance()
+	Game.dream_world.add_child(explosion)
+	explosion.global_translation = global_translation
+	
+	Game.cam_shake(1.4)
+	Game.take_dream_damage()
+	
+	yield(get_tree().create_timer(collision_cooldown),"timeout")
+	has_collided = false

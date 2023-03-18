@@ -3,8 +3,8 @@
 [ext_resource path="res://Deco/Cactus1.tscn" type="PackedScene" id=1]
 
 [sub_resource type="CapsuleShape" id=3]
-radius = 1.64331
-height = 2.81046
+radius = 1.81931
+height = 5.21405
 
 [node name="ObstacleSmallCactus" type="Spatial"]
 
@@ -12,10 +12,10 @@ height = 2.81046
 transform = Transform( 2.624, 0, 0, 0, 2.624, 0, 0, 0, 2.624, 0, -7.74792, 0 )
 
 [node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0590044, 0 )
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4.03156, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4.93062, 0 )
 shape = SubResource( 3 )
-disabled = true
