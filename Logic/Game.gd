@@ -67,7 +67,7 @@ func random_event_process(delta: float):
 	
 	if cooldown_obstacle <= 0.0:
 		spawn_dream_obstacle()
-		cooldown_obstacle = lerp(4.0, 2.0, progress) + 2.5 * randf()
+		cooldown_obstacle = lerp(4.0, 1.0, progress) + 2.0 * randf()
 	
 	if cooldown_speed <= 0.0:
 		car.speed_boost()
@@ -122,4 +122,7 @@ func reset_game():
 	max_damage = 100.0
 	time_survived = 0.0
 	time_goal = 120.0
+	cooldown_truck = 1.8
+	cooldown_obstacle = 14.0
+	cooldown_speed = 20.0
 	get_tree().change_scene("res://Logic/Main.tscn")

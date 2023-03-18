@@ -46,7 +46,7 @@ func handle_collision(collision: KinematicCollision):
 	var normal := collision.normal
 	var pos := collision.position
 	
-	velocity = pos.direction_to(global_translation) * 14.0
+	velocity = pos.direction_to(global_translation) * 11.0
 	
 	var explosion := EXPLOSION.instance()
 	Game.world.add_child(explosion)
@@ -54,6 +54,13 @@ func handle_collision(collision: KinematicCollision):
 	
 	Game.cam_shake()
 	Game.take_awake_damage()
+	
+	if Game.health_points == 2:
+		$AwakeParts.add_part($Model/CarModel/WheelPivotFL, $Model.to_global(Vector3(-1, 200, -1)))
+		$AwakeParts.add_part($Model/CarModel/MirrorR, $Model.to_global(Vector3(1, 200, -1)))
+	elif Game.health_points == 1:
+		$AwakeParts.add_part($Model/CarModel/SilverThingBack, $Model.to_global(Vector3(1, 200, 1)))
+		$AwakeParts.add_part($Model/CarModel/MirrorL, $Model.to_global(Vector3(-1, 200, -1)))
 	
 	yield(get_tree().create_timer(collision_cooldown),"timeout")
 	has_collided = false
