@@ -387,7 +387,7 @@ unique_name_in_owner = true
 transform = Transform( 1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, -1.52969, 0.721128, -1.17788 )
 
 [node name="WheelFR" type="MeshInstance" parent="WheelPivotFR"]
-transform = Transform( 1, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 1, 0, 5.96046e-08, -1.19209e-07 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, -1.19209e-07 )
 mesh = SubResource( 6 )
 skeleton = NodePath("../..")
 

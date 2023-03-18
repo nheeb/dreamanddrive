@@ -18,6 +18,11 @@ var turn_speed := 2.0
 var turn_velocity := 0.0
 var turn_acc := 3.0
 
+func _ready():
+	$CarModel/AnimationPlayer.stop()
+	$CarModel/AnimationPlayer.queue_free()
+	
+
 func _physics_process(delta):
 	get_input()
 	change_direction(delta)
@@ -82,10 +87,8 @@ func intro_movement():
 	yield(get_tree().create_timer(.5),"timeout")
 	intro_mode = false
 
-
 func _on_Area_area_entered(area):
 	handle_collision()
-	print("!")
 
 var collision_cooldown := 2.8
 var has_collided := false
@@ -103,6 +106,13 @@ func handle_collision():
 	
 	Game.cam_shake(1.4)
 	Game.take_dream_damage()
+	
+	if Game.dream_health_points == 2:
+		$PartsPivot.add_part($CarModel/WheelPivotFL/WheelFL, Vector3.LEFT, Vector3(-2, -20, -horizontal_speed*10))
+		$PartsPivot.add_part($CarModel/WheelBR, Vector3.RIGHT, Vector3(2, -20, -horizontal_speed*10))
+	elif Game.dream_health_points == 1:
+		$PartsPivot.add_part($CarModel/WheelPivotFR/WheelFR, Vector3.UP, Vector3(2, -20, -horizontal_speed*10))
+		$PartsPivot.add_part($CarModel/WheelBL, Vector3.DOWN, Vector3(-2, -20, -horizontal_speed*10))
 	
 	yield(get_tree().create_timer(collision_cooldown),"timeout")
 	has_collided = false

@@ -1,11 +1,44 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Logic/CarModel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Logic/DreamCar.gd" type="Script" id=2]
+[ext_resource path="res://Logic/PartsPivot.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.593034
 height = 1.46739
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("PartsPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fly"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PartsPivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 360 ) ]
+}
 
 [node name="DreamCar" type="Spatial"]
 script = ExtResource( 2 )
@@ -33,5 +66,14 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.745259, -0.0469871 )
 shape = SubResource( 1 )
+
+[node name="PartsPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790006, 2.87311 )
+script = ExtResource( 3 )
+
+[node name="FlyingPartsPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fly"
+anims/RESET = SubResource( 2 )
+anims/fly = SubResource( 3 )
 
 [connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]

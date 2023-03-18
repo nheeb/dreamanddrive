@@ -51,7 +51,7 @@ func _physics_process(delta):
 			
 		random_event_process(delta)
 
-var cooldown_truck := 5.0
+var cooldown_truck := 1.8
 var cooldown_obstacle := 14.0
 var cooldown_speed := 20.0
 func random_event_process(delta: float):
