@@ -36,6 +36,8 @@ func _physics_process(_delta):
 #		enemy_car.setup(Game.map.last_waypoint)
 	if Input.is_action_just_pressed("cheat_spawn_obstacle"):
 		Game.spawn_dream_obstacle()
+	if Input.is_action_just_pressed("cheat_win"):
+		Game.trigger_end()
 
 
 func _on_Timer_timeout():

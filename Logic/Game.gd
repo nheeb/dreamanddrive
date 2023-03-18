@@ -13,6 +13,7 @@ var viewport_shader: ShaderMaterial
 
 var dead := false
 var intro := true
+var finish := false
 
 var health_points := 3
 var dream_health_points := 3
@@ -43,7 +44,7 @@ func start_intro():
 var time_survived := 0.0
 var time_goal := 120.0
 func _physics_process(delta):
-	if not intro:
+	if not intro and not finish and not dead:
 		time_survived += delta
 		viewport_shader.set("shader_param/dream_progress", time_survived / time_goal)
 		if time_survived > time_goal:
@@ -74,10 +75,14 @@ func random_event_process(delta: float):
 		cooldown_speed = 12.0 + randf() * 10.0 
 
 func trigger_end():
-	pass
-
-#func _process(delta):
-#	print(Engine.get_frames_per_second())
+	finish = true
+	world.cam_follow = false
+	var tween := get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.parallel().tween_property(viewport_shader, "shader_param/dream_start", 0.0, 2.0).from_current()
+	tween.parallel().tween_property(viewport_shader, "shader_param/dream_progress", 0.0, 2.0).from_current()
+	yield(get_tree().create_timer(3),"timeout")
+	main.click_to_restart = true
 
 func cam_shake(intensity := 1.0):
 	world_cam.screen_shake(intensity)
@@ -117,7 +122,9 @@ func trigger_death():
 func reset_game():
 	dead = false
 	intro = true
+	finish = false
 	health_points = 3
+	dream_health_points = 3
 	damage = 0.0
 	max_damage = 100.0
 	time_survived = 0.0

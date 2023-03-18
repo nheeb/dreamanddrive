@@ -8,9 +8,16 @@ func _ready():
 	Game.map = $Map
 	Game.world_cam = $CamPivot/Camera
 	cam_offset = $CamPivot.global_translation - $Car.global_translation
-	
-func _process(_delta):
-	$CamPivot.global_translation = $Car.global_translation + cam_offset
+
+var cam_follow := true
+var rest_follow := 1.0
+func _process(delta):
+	if cam_follow:
+		$CamPivot.global_translation = $Car.global_translation + cam_offset
+	else:
+		$CamPivot.global_translation += $Car.velocity * delta * rest_follow
+		rest_follow -= delta * .3
+		rest_follow = clamp(rest_follow, 0.0, 1.0)
 
 func cam_out():
 	$CamAnimation.play("intro")

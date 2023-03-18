@@ -94,7 +94,7 @@ var collision_cooldown := 2.8
 var has_collided := false
 const EXPLOSION = preload("res://Effects/Explosion.tscn")
 func handle_collision():
-	if has_collided:
+	if has_collided or Game.finish or Game.dead:
 		return
 	has_collided = true
 	
