@@ -56,12 +56,15 @@ func _physics_process(delta):
 var cooldown_truck := 1.8
 var cooldown_obstacle := 14.0
 var cooldown_speed := 20.0
+var cooldown_block := 28.0
+var ready_for_block := false
 func random_event_process(delta: float):
 	var progress := time_survived / time_goal
 	
 	cooldown_truck -= delta
 	cooldown_obstacle -= delta
 	cooldown_speed -= delta
+	cooldown_block -= delta
 	
 	if cooldown_truck <= 0.0:
 		spawn_truck()
@@ -73,7 +76,11 @@ func random_event_process(delta: float):
 	
 	if cooldown_speed <= 0.0:
 		car.speed_boost()
-		cooldown_speed = 12.0 + randf() * 8.0 
+		cooldown_speed = 12.0 + randf() * 8.0
+	
+	if cooldown_block <= 0.0:
+		ready_for_block = true
+		cooldown_block = 24.0 + randf() * 8.0
 
 func trigger_end():
 	finish = true
@@ -133,4 +140,6 @@ func reset_game():
 	cooldown_truck = 1.8
 	cooldown_obstacle = 14.0
 	cooldown_speed = 20.0
+	cooldown_block = 25.0
+	ready_for_block = false
 	get_tree().change_scene("res://Logic/Main.tscn")

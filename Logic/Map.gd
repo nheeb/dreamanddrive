@@ -142,11 +142,16 @@ const LAMP = preload("res://Deco/Lamp.tscn")
 const STREET_STRAIGHT = preload("res://StreetParts/StreetStraight.tscn")
 const STREET_CURVE = preload("res://StreetParts/StreetCurve.tscn")
 const STREET_DIAGONAL = preload("res://StreetParts/StreetDiagonal.tscn")
+const BLOCK = preload("res://StreetParts/StreetBlock.tscn")
 func build_street(coords: Array, street_part: int):
 	var street_object
 	match(street_part):
 		StreetParts.Straight:
 			street_object = STREET_STRAIGHT.instance()
+			if Game.ready_for_block:
+				Game.ready_for_block = false
+				street_object.add_child(BLOCK.instance())
+				street_object.get_node("Straight").visible = false
 		StreetParts.StraightTurnEast:
 			street_object = STREET_CURVE.instance()
 		StreetParts.StraightTurnNorth:
