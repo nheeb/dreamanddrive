@@ -43,6 +43,7 @@ func refresh_size():
 	$ViewportContainer.update()
 
 #const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
+const EXPLOSION = preload("res://Effects/Explosion.tscn")
 func _physics_process(_delta):
 	$UI/Label.text = "FPS: " + str(Engine.get_frames_per_second())
 	if Game.intro:
@@ -63,6 +64,13 @@ func _physics_process(_delta):
 		Game.spawn_dream_obstacle()
 	if Input.is_action_just_pressed("cheat_win"):
 		Game.trigger_end()
+	if Input.is_action_just_pressed("cheat_explosion"):
+		var e = EXPLOSION.instance()
+		Game.world.add_child(e)
+		e.global_translation = Game.car.global_translation
+		e = EXPLOSION.instance()
+		Game.dream_world.add_child(e)
+		e.global_translation = Game.dream_car.global_translation
 
 
 func _on_Timer_timeout():
