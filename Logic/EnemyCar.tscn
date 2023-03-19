@@ -11,7 +11,7 @@
 [ext_resource path="res://Gltf/TruckDark.material" type="Material" id=9]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 1.29377, 1.66526, 3.10772 )
+extents = Vector3( 0.898118, 1.66526, 2.67007 )
 
 [sub_resource type="ArrayMesh" id=2]
 resource_name = "Truck_Plane"
@@ -155,7 +155,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84862, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92165, 0.541723 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92165, 0.213212 )
 shape = SubResource( 1 )
 
 [node name="Model" type="Spatial" parent="."]

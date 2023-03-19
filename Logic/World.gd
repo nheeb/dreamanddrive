@@ -8,6 +8,9 @@ func _ready():
 	Game.map = $Map
 	Game.world_cam = $CamPivot/Camera
 	cam_offset = $CamPivot.global_translation - $Car.global_translation
+	$IntroTexts.visible = true
+	yield(get_tree().create_timer(.1),"timeout")
+	$IntroTexts.visible = false
 
 var cam_follow := true
 var rest_follow := 1.0

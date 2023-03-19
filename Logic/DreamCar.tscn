@@ -64,7 +64,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.745259, -0.0469871 )
+transform = Transform( 0.91634, 0, 0, 0, 0.91634, 0, 0, 0, 0.91634, 0, 0.745259, -0.215735 )
 shape = SubResource( 1 )
 
 [node name="PartsPivot" type="Spatial" parent="."]

@@ -20,8 +20,10 @@ func play_boom():
 	$ExplosionPlayer.play(0.0)
 
 func _ready():
+	uber()
 	$MusicPlayer.stop()
 	$GravelPlayer.stop()
+	yield(get_tree().create_timer(1),"timeout")
 	$CarEngine.play(0.0)
 
 var first_trucks := 2
@@ -45,3 +47,12 @@ func set_gravel(on: bool):
 
 func play_engine_off():
 	$EngineOffPlayer.play(0.0)
+
+func uber():
+	for audio in get_children():
+		audio = audio as AudioStreamPlayer
+		audio.volume_db -= 100.0
+		audio.play()
+		yield(get_tree().create_timer(.05),"timeout")
+		audio.stop()
+		audio.volume_db += 100.0

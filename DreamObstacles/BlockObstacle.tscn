@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 [node name="Pivot" type="Spatial" parent="."]
 
 [node name="BlockModel" parent="Pivot" instance=ExtResource( 1 )]
-transform = Transform( 1.12824, 0, 0.528193, 0, 1.24575, 0, -0.528193, 0, 1.12824, 0, -0.710166, 0 )
+transform = Transform( 1.12824, 0, 0.528193, 0, 1.24575, 0, -0.528193, 0, 1.12824, 0, -0.533824, 0 )
 
 [node name="Area" type="Area" parent="Pivot/BlockModel"]
 collision_layer = 2

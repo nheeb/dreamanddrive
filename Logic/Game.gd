@@ -68,7 +68,7 @@ func random_event_process(delta: float):
 	
 	if cooldown_truck <= 0.0:
 		spawn_truck()
-		cooldown_truck = lerp(10.0, 7.0, progress) + 3.0 * randf()
+		cooldown_truck = lerp(11.0, 7.0, progress) + 4.0 * randf()
 	
 	if cooldown_obstacle <= 0.0:
 		spawn_dream_obstacle()
@@ -108,7 +108,7 @@ func spawn_dream_obstacle():
 		o.global_translation = pos
 	else:
 		var pos = dream_world.global_translation
-		pos.z = dream_car.global_translation.z - (32.0 + randf() * 5.0)
+		pos.z = dream_car.global_translation.z - (31.0 + randf() * 5.0)
 		var o = OBSTACLE_MOVER.instance()
 		dream_world.add_child(o)
 		o.global_translation = pos
@@ -132,6 +132,8 @@ func take_dream_damage():
 		trigger_death()
 
 func trigger_death():
+	if finish:
+		return
 	dead = true
 	yield(get_tree().create_timer(2),"timeout")
 	main.click_to_restart = true

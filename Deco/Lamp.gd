@@ -2,6 +2,8 @@ extends Spatial
 
 func _ready():
 	if Game.intro:
+		$SpotLight.visible = true
+		yield(get_tree(),"idle_frame")
 		$SpotLight.visible = false
 
 func turn_on():
