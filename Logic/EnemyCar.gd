@@ -28,7 +28,7 @@ var halt_tween : SceneTreeTween
 func halt():
 	speed = 0.0
 	if is_instance_valid(halt_tween): halt_tween.kill()
-	yield(get_tree().create_timer(2),"timeout")
+	yield(get_tree().create_timer(3.5),"timeout")
 	halt_tween = get_tree().create_tween()
 	halt_tween.tween_property(self, "speed", 10.0, 4.0).from(0.0)
 

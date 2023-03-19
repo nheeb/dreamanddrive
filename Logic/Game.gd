@@ -22,14 +22,14 @@ var max_damage := 100.0
 
 func _ready():
 	randomize()
-	Sound.add_db(-200)
+	Sound.add_db(-500)
 	yield(get_tree().create_timer(.1),"timeout")
 	start_intro(true)
 	car.handle_collision(null)
 	dream_car.handle_collision()
-	yield(get_tree().create_timer(1.3),"timeout")
+	yield(get_tree().create_timer(2.3),"timeout")
 	reset_game()
-	Sound.add_db(200)
+	Sound.add_db(500)
 
 func start_intro(uber := false):
 	world.reduce_sky_energy()

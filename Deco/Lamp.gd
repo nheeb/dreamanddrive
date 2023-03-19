@@ -3,7 +3,7 @@ extends Spatial
 func _ready():
 	if Game.intro:
 		$SpotLight.visible = true
-		yield(get_tree(),"idle_frame")
+		yield(get_tree().create_timer(.5),"timeout")
 		$SpotLight.visible = false
 
 func turn_on():

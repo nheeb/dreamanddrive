@@ -8,6 +8,9 @@ func add_db(value):
 func start_music():
 	$MusicPlayer.play(0.0)
 
+func stop_music():
+	$MusicPlayer.stop()
+
 func fade_out_engine():
 	var tween := get_tree().create_tween()
 	tween.tween_property($CarEngine, "volume_db", -200.0, 2.0)
@@ -57,10 +60,12 @@ func play_engine_off():
 	$EngineOffPlayer.play(0.0)
 
 func uber():
+	add_db(-200)
 	for audio in get_children():
 		audio = audio as AudioStreamPlayer
-		audio.volume_db -= 100.0
+		audio.volume_db -= 200.0
 		audio.play(0.0)
 		yield(get_tree().create_timer(.1),"timeout")
 		audio.stop()
-		audio.volume_db += 100.0
+		audio.volume_db += 200.0
+	add_db(200)

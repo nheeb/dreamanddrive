@@ -125,6 +125,7 @@ void fragment() {
 	COLOR.rgb = mix(COLOR.rgb,texture(dream, UV).rgb , .01 * black_screen + texture(dream, UV).a* (1.0 - (dream_border_wide(UV, 1.2 * dream_start))));
 	// Black Screen
 	COLOR.rgb = mix(COLOR.rgb, vec3(0.0), min(.99, black_screen));
+	COLOR.rgb = mix(COLOR.rgb, vec3(0.0), min(.99, black_screen));
 	COLOR.a = 1.0;
 }"
 

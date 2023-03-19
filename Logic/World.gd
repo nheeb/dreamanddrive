@@ -14,6 +14,7 @@ func _ready():
 	for i in range(10):
 		yield(get_tree().create_timer(.1),"timeout")
 		$IntroTexts.visible = false
+		Sound.stop_music()
 	
 
 var cam_follow := true
