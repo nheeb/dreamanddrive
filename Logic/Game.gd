@@ -69,11 +69,11 @@ func random_event_process(delta: float):
 	
 	if cooldown_obstacle <= 0.0:
 		spawn_dream_obstacle()
-		cooldown_obstacle = lerp(4.0, 1.0, progress) + 2.0 * randf()
+		cooldown_obstacle = lerp(4.5, 2.0, progress) + 1.0 * randf()
 	
 	if cooldown_speed <= 0.0:
 		car.speed_boost()
-		cooldown_speed = 12.0 + randf() * 10.0 
+		cooldown_speed = 12.0 + randf() * 8.0 
 
 func trigger_end():
 	finish = true

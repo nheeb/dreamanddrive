@@ -178,7 +178,9 @@ func build_street(coords: Array, street_part: int):
 	
 	last_waypoint = street_object.connect_waypoints(last_waypoint)
 
-	if randi() % 3 <= 1:
+	var lamp_condition := (randi() % 5 <= 2) or Game.intro
+
+	if lamp_condition:
 		var points : Array = street_object.get_node("LampSpots").get_children()
 		points.shuffle()
 		var lamp = LAMP.instance()
