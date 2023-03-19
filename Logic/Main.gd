@@ -80,6 +80,10 @@ func _physics_process(_delta):
 		e = EXPLOSION.instance()
 		Game.dream_world.add_child(e)
 		e.global_translation = Game.dream_car.global_translation
+	if Input.is_action_just_pressed("volume_up"):
+		Sound.add_db(2)
+	if Input.is_action_just_pressed("volume_down"):
+		Sound.add_db(-2)
 
 
 func _on_Timer_timeout():

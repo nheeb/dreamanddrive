@@ -209,7 +209,7 @@ func discover_coord(coords: Array):
 		return
 	randomize()
 	discovered_coords.append(coords)
-	for surrounding in get_surrouding_coords(coords, 4):
+	for surrounding in get_surrouding_coords(coords, 5):
 		var has_build_something = build_tile(surrounding)
 		if has_build_something:
 			yield(get_tree(),"idle_frame")

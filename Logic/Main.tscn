@@ -197,6 +197,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="UI"]
+visible = false
 margin_right = 40.0
 margin_bottom = 14.0
 text = "asdf"
@@ -227,9 +228,11 @@ rect_min_size = Vector2( 400, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 4 )
-text = "Steer with <A / D>
+text = "Steer with < A / D >
 
-Fly with <W / S>
+Fly with < W / S >
+
+Change volume with < + / - >
 
 
 Start Game with <Left Click>"
