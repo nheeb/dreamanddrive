@@ -138,6 +138,7 @@ func build_ground(coords: Array, street_dist: int):
 
 var last_waypoint = null
 
+const LAMP = preload("res://Deco/Lamp.tscn")
 const STREET_STRAIGHT = preload("res://StreetParts/StreetStraight.tscn")
 const STREET_CURVE = preload("res://StreetParts/StreetCurve.tscn")
 const STREET_DIAGONAL = preload("res://StreetParts/StreetDiagonal.tscn")
@@ -177,6 +178,11 @@ func build_street(coords: Array, street_part: int):
 	
 	last_waypoint = street_object.connect_waypoints(last_waypoint)
 
+	if randi() % 3 <= 1:
+		var points : Array = street_object.get_node("LampSpots").get_children()
+		points.shuffle()
+		var lamp = LAMP.instance()
+		points[0].add_child(lamp)
 #	var tween := get_tree().create_tween()
 #	tween.set_ease(Tween.EASE_OUT)
 #	tween.set_trans(Tween.TRANS_QUAD)

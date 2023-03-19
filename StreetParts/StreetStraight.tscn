@@ -78,3 +78,11 @@ collision_mask = 0
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85521, 0 )
 shape = SubResource( 2 )
+
+[node name="LampSpots" type="Spatial" parent="."]
+
+[node name="Spatial" type="Spatial" parent="LampSpots"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.5 )
+
+[node name="Spatial2" type="Spatial" parent="LampSpots"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 4.5 )

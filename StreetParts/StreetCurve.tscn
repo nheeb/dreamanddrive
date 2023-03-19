@@ -111,3 +111,11 @@ shape = SubResource( 2 )
 [node name="CollisionShape3" type="CollisionShape" parent="Area"]
 transform = Transform( 0.700735, 0, -0.713422, 0, 1, 0, 0.713422, 0, 0.700735, 6.57398, 2.4746, 6.60068 )
 shape = SubResource( 2 )
+
+[node name="LampSpots" type="Spatial" parent="."]
+
+[node name="Spatial2" type="Spatial" parent="LampSpots"]
+transform = Transform( 0.899893, 0, -0.436111, 0, 1, 0, 0.436111, 0, 0.899893, 2.31372, 1, -1.72611 )
+
+[node name="Spatial" type="Spatial" parent="LampSpots"]
+transform = Transform( -0.924366, 0, 0.381506, 0, 1, 0, -0.381506, 0, -0.924366, -1.43231, 1, 6.50047 )

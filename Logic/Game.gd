@@ -27,6 +27,7 @@ func start_intro():
 	world.reduce_sky_energy()
 	yield(get_tree().create_timer(2.0),"timeout")
 	car.turn_on_lights()
+	get_tree().call_group("lamp", "turn_on")
 	world.show_intro_texts()
 	yield(get_tree().create_timer(2.5),"timeout")
 	Sound.fade_out_engine()
