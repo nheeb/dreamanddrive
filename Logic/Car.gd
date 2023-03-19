@@ -38,13 +38,21 @@ func handle_collision(collision: KinematicCollision):
 	if has_collided:
 		return
 	has_collided = true
+	
 	halt()
 	Sound.play_boom()
-	if collision.collider.get_parent().has_method("_on_collide"):
-		collision.collider.get_parent()._on_collide()
+	if collision != null:
+		if collision.collider.get_parent().has_method("_on_collide"):
+			collision.collider.get_parent()._on_collide()
 	
-	var normal := collision.normal
-	var pos := collision.position
+	var pos: Vector3
+	var normal: Vector3
+	if collision != null:
+		normal = collision.normal
+		pos = collision.position
+	else:
+		normal = Vector3.UP
+		pos = global_translation
 	
 	velocity = pos.direction_to(global_translation) * 11.0
 	

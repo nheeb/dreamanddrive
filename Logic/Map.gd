@@ -183,7 +183,7 @@ func build_street(coords: Array, street_part: int):
 	
 	last_waypoint = street_object.connect_waypoints(last_waypoint)
 
-	var lamp_condition := (randi() % 5 <= 2) or Game.intro
+	var lamp_condition : bool = (randi() % 5 <= 2) or Game.intro
 
 	if lamp_condition:
 		var points : Array = street_object.get_node("LampSpots").get_children()

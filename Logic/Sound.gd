@@ -1,5 +1,10 @@
 extends Node
 
+func add_db(value):
+	for audio in get_children():
+		audio = audio as AudioStreamPlayer
+		audio.volume_db += value
+
 func start_music():
 	$MusicPlayer.play(0.0)
 
@@ -10,16 +15,19 @@ func fade_out_engine():
 	$CarEngine.stop()
 
 func play_acc(repeat := false):
-	$CarAccel.play()
+	$CarAccel.play(0.0)
 	if not repeat:
 		return
 	yield($CarAccel,"finished")
-	$CarAccel.play()
+	$CarAccel.play(0.0)
 
 func play_boom():
 	$ExplosionPlayer.play(0.0)
 
 func _ready():
+	for audio in get_children():
+		audio = audio as AudioStreamPlayer
+		audio.stop()
 	uber()
 	$MusicPlayer.stop()
 	$GravelPlayer.stop()
@@ -52,7 +60,7 @@ func uber():
 	for audio in get_children():
 		audio = audio as AudioStreamPlayer
 		audio.volume_db -= 100.0
-		audio.play()
-		yield(get_tree().create_timer(.05),"timeout")
+		audio.play(0.0)
+		yield(get_tree().create_timer(.1),"timeout")
 		audio.stop()
 		audio.volume_db += 100.0

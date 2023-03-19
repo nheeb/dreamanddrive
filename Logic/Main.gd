@@ -8,7 +8,7 @@ func _ready():
 	Game.viewport_shader = $ViewportContainer.material
 	yield(get_tree().create_timer(.01),"timeout")
 	refresh_size()
-	yield(get_tree().create_timer(1),"timeout")
+	yield(get_tree().create_timer(2.5),"timeout")
 	fade_from_black_screen()
 	yield(get_tree().create_timer(1),"timeout")
 	click_to_start = true
