@@ -8,6 +8,15 @@ func _ready():
 	Game.viewport_shader = $ViewportContainer.material
 	yield(get_tree().create_timer(.01),"timeout")
 	refresh_size()
+	for i in range(10):
+		var e = EXPLOSION.instance()
+		Game.world.add_child(e)
+		e.global_translation = Game.car.global_translation
+		e = EXPLOSION.instance()
+		Game.dream_world.add_child(e)
+		e.global_translation = Game.dream_car.global_translation
+		yield(get_tree(),"physics_frame")
+		yield(get_tree(),"physics_frame")
 	yield(get_tree().create_timer(2.5),"timeout")
 	fade_from_black_screen()
 	yield(get_tree().create_timer(1),"timeout")

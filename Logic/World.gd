@@ -38,8 +38,8 @@ func show_intro_texts():
 
 func reduce_sky_energy():
 	$SunPlayer.play("sun")
-	yield(get_tree().create_timer(2.5),"timeout")
-	$DirectionalLight.visible = false
+	#yield(get_tree().create_timer(2.5),"timeout")
+	#$DirectionalLight.visible = false
 #	var tween := get_tree().create_tween()
 #	#tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 #	tween.tween_property($WorldEnvironment.environment.background_sky, "sky_energy", .4, 2.0).from(1.0)

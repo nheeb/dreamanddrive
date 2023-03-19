@@ -22,23 +22,22 @@ var max_damage := 100.0
 
 func _ready():
 	randomize()
-	Sound.add_db(-500)
-	yield(get_tree().create_timer(.1),"timeout")
-	start_intro(true)
-	car.handle_collision(null)
-	dream_car.handle_collision()
-	yield(get_tree().create_timer(2.3),"timeout")
-	reset_game()
-	Sound.add_db(500)
+#	yield(get_tree().create_timer(.2),"timeout")
+#	Sound.add_db(-500)
+#	yield(get_tree().create_timer(.1),"timeout")
+#	start_intro(true)
+#	car.handle_collision(null)
+#	dream_car.handle_collision()
+#	yield(get_tree().create_timer(2.3),"timeout")
+#	reset_game()
+#	Sound.add_db(500)
 
-func start_intro(uber := false):
+func start_intro():
 	world.reduce_sky_energy()
-	yield(get_tree().create_timer(2.0 if not uber else .1),"timeout")
+	yield(get_tree().create_timer(2.0),"timeout")
 	car.turn_on_lights()
 	get_tree().call_group("lamp", "turn_on")
 	world.show_intro_texts()
-	if uber:
-		return
 	yield(get_tree().create_timer(2.5),"timeout")
 	Sound.fade_out_engine()
 	Sound.play_acc(true)

@@ -27,14 +27,18 @@ func play_acc(repeat := false):
 func play_boom():
 	$ExplosionPlayer.play(0.0)
 
+var first_ready := true
 func _ready():
 	for audio in get_children():
 		audio = audio as AudioStreamPlayer
 		audio.stop()
-	uber()
+	yield(get_tree(),"physics_frame")
+	if first_ready:
+		uber()
+		first_ready = false
 	$MusicPlayer.stop()
 	$GravelPlayer.stop()
-	yield(get_tree().create_timer(1),"timeout")
+	yield(get_tree().create_timer(2),"timeout")
 	$CarEngine.play(0.0)
 
 var first_trucks := 2
@@ -60,12 +64,13 @@ func play_engine_off():
 	$EngineOffPlayer.play(0.0)
 
 func uber():
+	return
 	add_db(-200)
 	for audio in get_children():
 		audio = audio as AudioStreamPlayer
 		audio.volume_db -= 200.0
 		audio.play(0.0)
-		yield(get_tree().create_timer(.1),"timeout")
+		yield(get_tree().create_timer(.2),"timeout")
 		audio.stop()
 		audio.volume_db += 200.0
 	add_db(200)

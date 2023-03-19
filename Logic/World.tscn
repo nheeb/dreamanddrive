@@ -161,10 +161,13 @@ anims/RESET = SubResource( 3 )
 anims/intro = SubResource( 4 )
 
 [node name="IntroTexts" type="Spatial" parent="."]
+visible = false
 
 [node name="Label3D" type="Label3D" parent="IntroTexts"]
 transform = Transform( 1.59269, 0, 0, 0, -6.96186e-08, 1.59269, 0, -1.59269, -6.96186e-08, 36.0185, 1.23256, -1.21337 )
 cast_shadow = 0
+double_sided = false
+alpha_cut = 2
 modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
 text = "As the sunlight fades..."
 font = SubResource( 5 )
@@ -172,6 +175,8 @@ font = SubResource( 5 )
 [node name="Label3D2" type="Label3D" parent="IntroTexts"]
 transform = Transform( 1.73426, 0, 0, 0, -7.58068e-08, 1.73426, 0, -1.73426, -7.58068e-08, 68.904, 1.23256, 1.35802 )
 cast_shadow = 0
+double_sided = false
+alpha_cut = 2
 modulate = Color( 0.517647, 0.517647, 0.517647, 1 )
 text = "Your mind drifts away"
 font = SubResource( 5 )
@@ -182,4 +187,4 @@ anims/RESET = SubResource( 7 )
 anims/sun = SubResource( 6 )
 
 [node name="Ubershader" parent="." instance=ExtResource( 9 )]
-transform = Transform( 0.0898237, 0, 0, 0, 0.0898237, 0, 0, 0, 0.0898237, 13.4189, -2.6749, 6.72621 )
+transform = Transform( 0.0898237, 0, 0, 0, 0.0898237, 0, 0, 0, 0.0898237, -2.4869, 3.55307, 2.15879 )
