@@ -148,7 +148,7 @@ shader_param/dream = SubResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
-outline_size = 2
+outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
@@ -228,14 +228,14 @@ rect_min_size = Vector2( 400, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 4 )
-text = "Steer with < A / D >
+text = "Steer with  < A / D >
 
-Fly with < W / S >
+Fly with  < W / S >
 
-Change volume with < + / - >
+Change volume with  < + / - >
 
 
-Start Game with <Left Click>"
+Start Game with  < Left Click >"
 align = 1
 valign = 1
 
