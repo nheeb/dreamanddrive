@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gravel_tire.mp3-c3096bc83bafcd9d0e71aa4fe491b883.mp3str"
+
+[deps]
+
+source_file="res://Sounds/gravel_tire.mp3"
+dest_files=[ "res://.import/gravel_tire.mp3-c3096bc83bafcd9d0e71aa4fe491b883.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

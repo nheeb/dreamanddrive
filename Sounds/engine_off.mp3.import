@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/engine_off.mp3-dea3a7b189557dc5b8c2d7c3dc1ae115.mp3str"
+
+[deps]
+
+source_file="res://Sounds/engine_off.mp3"
+dest_files=[ "res://.import/engine_off.mp3-dea3a7b189557dc5b8c2d7c3dc1ae115.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

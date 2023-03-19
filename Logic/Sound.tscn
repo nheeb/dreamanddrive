@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Logic/Sound.gd" type="Script" id=1]
 [ext_resource path="res://Sounds/music.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Sounds/motor-loop.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Sounds/car_ac.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Sounds/explosion.mp3" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/gravel_tire.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/truck.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/truck_horn.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Sounds/engine_off.mp3" type="AudioStream" id=9]
 
 [node name="Sound" type="Node"]
 script = ExtResource( 1 )
@@ -16,7 +20,6 @@ volume_db = -24.0
 [node name="CarEngine" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
-autoplay = true
 
 [node name="CarAccel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -25,3 +28,21 @@ volume_db = -30.0
 [node name="ExplosionPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -20.0
+
+[node name="TruckPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -15.0
+mix_target = 2
+
+[node name="TruckHornPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -22.0
+mix_target = 2
+
+[node name="GravelPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -28.0
+
+[node name="EngineOffPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -14.0

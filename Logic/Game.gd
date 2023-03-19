@@ -89,6 +89,7 @@ func trigger_end():
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.parallel().tween_property(viewport_shader, "shader_param/dream_start", 0.0, 2.0).from_current()
 	tween.parallel().tween_property(viewport_shader, "shader_param/dream_progress", 0.0, 2.0).from_current()
+	main.fade_finish_text()
 	yield(get_tree().create_timer(3),"timeout")
 	main.click_to_restart = true
 
@@ -97,14 +98,22 @@ func cam_shake(intensity := 1.0):
 	dream_cam.screen_shake(intensity)
 
 const OBSTACLE_MOVER = preload("res://DreamObstacles/ObstacleMover.tscn")
+const BLOCK_OBSTACLE = preload("res://DreamObstacles/BlockObstacle.tscn")
 func spawn_dream_obstacle():
-	var pos = dream_world.global_translation
-	pos.z = dream_car.global_translation.z - (32.0 + randf() * 6.0)
-	var o = OBSTACLE_MOVER.instance()
-	dream_world.add_child(o)
-	o.global_translation = pos
-	if randi() % 2 == 0:
-		o.global_rotate(Vector3.FORWARD, deg2rad(180.0))
+	if randi() % 7 <= 1:
+		var pos = dream_world.global_translation
+		pos.z = dream_car.global_translation.z - (32.0 + randf() * 5.0)
+		var o = BLOCK_OBSTACLE.instance()
+		dream_world.add_child(o)
+		o.global_translation = pos
+	else:
+		var pos = dream_world.global_translation
+		pos.z = dream_car.global_translation.z - (32.0 + randf() * 5.0)
+		var o = OBSTACLE_MOVER.instance()
+		dream_world.add_child(o)
+		o.global_translation = pos
+		if randi() % 2 == 0:
+			o.global_rotate(Vector3.FORWARD, deg2rad(180.0))
 
 const ENEMY_CAR = preload("res://Logic/EnemyCar.tscn")
 func spawn_truck():
@@ -126,6 +135,9 @@ func trigger_death():
 	dead = true
 	yield(get_tree().create_timer(2),"timeout")
 	main.click_to_restart = true
+	main.fade_to_black_screen()
+	main.fade_fail_text()
+	Sound.play_engine_off()
 
 func reset_game():
 	dead = false
@@ -142,4 +154,5 @@ func reset_game():
 	cooldown_speed = 20.0
 	cooldown_block = 25.0
 	ready_for_block = false
+	Sound._ready()
 	get_tree().change_scene("res://Logic/Main.tscn")

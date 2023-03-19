@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Logic/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Logic/DreamWorld.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Logic/Main.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/LemonMilk.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://title.png" type="Texture" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.5.1.stable's CanvasItemMaterial.
@@ -20,6 +22,7 @@ uniform vec4 CLOUD4_COL: hint_color = vec4(0.27,0.15,0.33,1.0);
 
 uniform float dream_start: hint_range(0.0, 1.0);
 uniform float dream_progress: hint_range(0.0, 1.0);
+uniform float black_screen: hint_range(0.0, 1.0) = 1.0;
 
 uniform float nebula_factor = 1.0;
 
@@ -120,6 +123,9 @@ void fragment() {
 	COLOR.rgb = mix(COLOR.rgb,nebula.rgb , nebula_factor * nebula.a * (1.0 - (dream_border_wide(UV, .5))));
 	// Dream Layer
 	COLOR.rgb = mix(COLOR.rgb,texture(dream, UV).rgb , texture(dream, UV).a* (1.0 - (dream_border_wide(UV, 1.2 * dream_start))));
+	// Black Screen
+	COLOR.rgb = mix(COLOR.rgb, vec3(0.0), min(.99, black_screen));
+	COLOR.a = 1.0;
 }"
 
 [sub_resource type="ViewportTexture" id=3]
@@ -135,8 +141,21 @@ shader_param/CLOUD3_COL = Color( 0.81, 0.31, 0.59, 1 )
 shader_param/CLOUD4_COL = Color( 0.92549, 0.776471, 1, 1 )
 shader_param/dream_start = 0.0
 shader_param/dream_progress = 0.0
+shader_param/black_screen = 1.0
 shader_param/nebula_factor = 1.0
 shader_param/dream = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -173,13 +192,103 @@ process_mode = 0
 autostart = true
 
 [node name="UI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="UI"]
 margin_right = 40.0
 margin_bottom = 14.0
 text = "asdf"
+
+[node name="CenterContainer" type="CenterContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer"]
+margin_left = 187.0
+margin_top = 73.0
+margin_right = 837.0
+margin_bottom = 527.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/CenterContainer/VBoxContainer"]
+margin_right = 650.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 650, 150 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="RichTextLabel" type="Label" parent="UI/CenterContainer/VBoxContainer"]
+margin_top = 154.0
+margin_right = 650.0
+margin_bottom = 454.0
+rect_min_size = Vector2( 400, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Steer with <A / D>
+
+Fly with <W / S>
+
+
+Start Game with <Left Click>"
+align = 1
+valign = 1
+
+[node name="FailContainer" type="CenterContainer" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/FailContainer"]
+margin_left = 345.0
+margin_top = 207.0
+margin_right = 679.0
+margin_bottom = 392.0
+
+[node name="FailText" type="Label" parent="UI/FailContainer/VBoxContainer"]
+margin_right = 334.0
+margin_bottom = 156.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "
+You Failed
+"
+align = 1
+valign = 1
+
+[node name="ClickToRestart" type="Label" parent="UI/FailContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 334.0
+margin_bottom = 185.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 4 )
+text = "Restart with <Left Click>"
+align = 1
+valign = 1
+
+[node name="FinishContainer" type="CenterContainer" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/FinishContainer"]
+margin_left = 246.0
+margin_top = 275.0
+margin_right = 777.0
+margin_bottom = 325.0
+
+[node name="FinishText" type="Label" parent="UI/FinishContainer/VBoxContainer"]
+margin_right = 531.0
+margin_bottom = 50.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 0.709804, 0.109804, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Destination Reached"
+align = 1
+valign = 1
 
 [connection signal="resized" from="ViewportContainer" to="." method="_on_ViewportContainer_resized"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -58,9 +58,11 @@ func handle_collision(collision: KinematicCollision):
 	if Game.health_points == 2:
 		$AwakeParts.add_part($Model/CarModel/WheelPivotFL, $Model.to_global(Vector3(-1, 200, -1)))
 		$AwakeParts.add_part($Model/CarModel/MirrorR, $Model.to_global(Vector3(1, 200, -1)))
+		$AwakeParts.add_part($Model/CarModel/BackLightL, $Model.to_global(Vector3(-1, 200, 1)))
 	elif Game.health_points == 1:
 		$AwakeParts.add_part($Model/CarModel/SilverThingBack, $Model.to_global(Vector3(1, 200, 1)))
 		$AwakeParts.add_part($Model/CarModel/MirrorL, $Model.to_global(Vector3(-1, 200, -1)))
+		$AwakeParts.add_part($Model/CarModel/BackLightR, $Model.to_global(Vector3(1, 200, 1)))
 	
 	yield(get_tree().create_timer(collision_cooldown),"timeout")
 	has_collided = false
@@ -155,3 +157,4 @@ func test_for_dirt():
 	on_dirt = len($Area.get_overlapping_areas()) == 0
 	engine_dirt = .9 if on_dirt else 1.0
 	$DirtParticles.emitting = on_dirt
+	Sound.set_gravel(on_dirt)

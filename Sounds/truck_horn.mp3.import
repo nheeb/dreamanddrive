@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/truck_horn.mp3-a09f910837de0473cce155cd8cc1ab33.mp3str"
+
+[deps]
+
+source_file="res://Sounds/truck_horn.mp3"
+dest_files=[ "res://.import/truck_horn.mp3-a09f910837de0473cce155cd8cc1ab33.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

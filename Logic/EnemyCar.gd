@@ -31,3 +31,10 @@ func halt():
 	yield(get_tree().create_timer(2),"timeout")
 	halt_tween = get_tree().create_tween()
 	halt_tween.tween_property(self, "speed", 10.0, 4.0).from(0.0)
+
+var sound_played := false
+func _on_Area_area_entered(area):
+	if sound_played:
+		return
+	sound_played = true
+	Sound.play_truck()

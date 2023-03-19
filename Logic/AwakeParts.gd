@@ -6,10 +6,10 @@ var directions := []
 var origins := []
 var max_duration := 10.0
 var flying_speed := 8.0
-var gravity := 4.5
+var gravity := 5.5
 
 func add_part(part:Spatial, direction: Vector3):
-	yield(get_tree().create_timer(.3),"timeout")
+	yield(get_tree().create_timer(.1),"timeout")
 	parts.append(part)
 	durations.append(0.0)
 	directions.append(direction.normalized())
